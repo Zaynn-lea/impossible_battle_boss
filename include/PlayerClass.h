@@ -9,12 +9,19 @@ class cPlayer
 {
 public:
 	cPlayer();
+	cPlayer(int pXmax, int pYmax);
 	~cPlayer();
 
 private:
-	olc::Sprite * plyrSprite;
-	olc::vi2d     plyrCoord;
+	olc::Sprite * idleSprite;
+	olc::Sprite * jumpSprite;
+	olc::vi2d     v2Coord;
+
+	int iXmax,  iYmax;
+	int iXsize, iYsize;
 
 public:
 	bool DrawPlayer(olc::PixelGameEngine * pge);
+
+	void updateCoord(float fElapsedTime);
 };

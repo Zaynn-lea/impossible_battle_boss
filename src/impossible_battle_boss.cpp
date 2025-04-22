@@ -25,7 +25,7 @@ public:
 public:
 	bool OnUserCreate() override
 	{
-		player = cPlayer();
+		player = cPlayer(600, 450);
 
 		return true;
 	}
@@ -35,6 +35,8 @@ public:
 		Clear(olc::BLACK);
 
 		player.DrawPlayer(this);
+
+		player.updateCoord(fElapsedTime);
 
 		return true;
 	}
