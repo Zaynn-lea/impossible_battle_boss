@@ -1,8 +1,8 @@
+#include "PlayerClass.h"
+#include "olcPixelGameEngine.h"
 
-#include "../include/PlayerClass.h"
 
-#include "../olcPixelGameEngine.h"
-
+using namespace ImpossibleBattleBoss;
 
 cPlayer::cPlayer()
 {}
@@ -21,9 +21,7 @@ cPlayer::cPlayer(int pXmax, int pYmax)
 	iYmax = pYmax - iYsize;
 }
 
-cPlayer::~cPlayer()
-{}
-
+cPlayer::~cPlayer(){}
 
 bool cPlayer::DrawPlayer(olc::PixelGameEngine * pge)
 {

@@ -33,3 +33,6 @@
 
 # Temporaries
 *.swp
+
+CMakeCache.txt
+CMakeFiles/
