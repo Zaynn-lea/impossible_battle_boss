@@ -1,5 +1,4 @@
 
-GCCFlags = -Wall -g
 
 
 all:	impossible_battle_boss.out
