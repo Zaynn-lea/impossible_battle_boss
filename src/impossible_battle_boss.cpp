@@ -1,4 +1,5 @@
 
+
 #define OLC_PGE_APPLICATION
 
 
@@ -11,7 +12,7 @@ class World : public olc::PixelGameEngine
 {
 
 private:
-	olc::Sprite * sprPlayer;
+	cPlayer player;
 
 
 public:
@@ -24,7 +25,7 @@ public:
 public:
 	bool OnUserCreate() override
 	{
-		sprPlayer = new olc::Sprite("../assests/proj1_IA.png");
+		player = cPlayer();
 
 		return true;
 	}
@@ -33,8 +34,7 @@ public:
 	{
 		Clear(olc::BLACK);
 
-		SetPixelMode(olc::Pixel::ALPHA);
-		DrawSprite(olc::vi2d(10, 10), sprPlayer);
+		player.DrawPlayer(this);
 
 		return true;
 	}

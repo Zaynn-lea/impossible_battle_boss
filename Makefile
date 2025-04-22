@@ -8,8 +8,8 @@ impossible_battle_boss.out:	src/impossible_battle_boss.cpp olcPixelGameEngine.h 
 	g++ -o impossible_battle_boss.out src/impossible_battle_boss.cpp lib/PlayerClass.o -lX11 -lGL -lpthread -lpng -lstdc++fs -std=c++17
 
 
-include/PlayerClass.o:	src/PlayerClass.cpp include/PlayerClass.h
-	g++ -c lib/PLayerClass.cpp
+lib/PlayerClass.o:	src/PlayerClass.cpp include/PlayerClass.h
+	g++ -c -o lib/PlayerClass.o src/PlayerClass.cpp
 
 
 clean:
