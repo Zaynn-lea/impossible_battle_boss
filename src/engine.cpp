@@ -1,5 +1,5 @@
-#include "olcPixelGameEngine.h"
 #include "engine.h"
+#include "olcPixelGameEngine.h"
 #include "PlayerClass.h"
 
 using namespace ImpossibleBattleBoss;

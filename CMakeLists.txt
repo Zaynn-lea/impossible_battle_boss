@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 file(GLOB_RECURSE SRC src/*)
 file(GLOB_RECURSE HEADERS include/*)
 
-add_executable(ImpossibleBattleBoss ${LIB_HEADERS} ${HEADERS} ${SRC} include/olcPixelGameEngine.h)
+add_executable(ImpossibleBattleBoss ${LIB_HEADERS} ${HEADERS} ${SRC})
 
 target_link_directories(ImpossibleBattleBoss PUBLIC .)
 target_include_directories(ImpossibleBattleBoss PUBLIC include)

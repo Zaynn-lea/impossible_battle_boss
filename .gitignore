@@ -36,3 +36,5 @@
 
 CMakeCache.txt
 CMakeFiles/
+*.cmake
+ImpossibleBattleBoss
