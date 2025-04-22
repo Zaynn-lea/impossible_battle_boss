@@ -1,27 +1,25 @@
-
 #pragma once
+#include "olcPixelGameEngine.h"
 
+namespace  ImpossibleBattleBoss {
+  class cPlayer
+  {
+    public:
+      cPlayer();
+      cPlayer(int pXmax, int pYmax);
+      ~cPlayer();
 
-#include "../olcPixelGameEngine.h"
+    private:
+      olc::Sprite * idleSprite;
+      olc::Sprite * jumpSprite;
+      olc::vi2d     v2Coord;
 
+      int iXmax,  iYmax;
+      int iXsize, iYsize;
 
-class cPlayer
-{
-public:
-	cPlayer();
-	cPlayer(int pXmax, int pYmax);
-	~cPlayer();
+    public:
+      bool DrawPlayer(olc::PixelGameEngine * pge);
 
-private:
-	olc::Sprite * idleSprite;
-	olc::Sprite * jumpSprite;
-	olc::vi2d     v2Coord;
-
-	int iXmax,  iYmax;
-	int iXsize, iYsize;
-
-public:
-	bool DrawPlayer(olc::PixelGameEngine * pge);
-
-	void updateCoord(float fElapsedTime);
+      void updateCoord(float fElapsedTime);
+  };
 };
