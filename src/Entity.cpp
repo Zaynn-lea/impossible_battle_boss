@@ -26,6 +26,7 @@ void setHP(int newHP)			{ HP	 = newHP; }
 void setPos(olc::vi2d newPos)		{ pos	 = newPos; }
 void setSprite(olc::Sprite * newSprite)	{ sprite = newSprite;}
 
+
 bool cEntity::isColiding(Entity other)
 {
 	// TODO
