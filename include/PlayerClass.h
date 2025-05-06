@@ -1,12 +1,14 @@
+
 #pragma once
+
 #include "olcPixelGameEngine.h"
+
 
 namespace  ImpossibleBattleBoss {
   class cPlayer
   {
     public:
       cPlayer();
-      cPlayer(int pXmax, int pYmax);
       ~cPlayer();
 
     private:

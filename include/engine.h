@@ -1,6 +1,9 @@
+
 #pragma once
+
 #include "olcPixelGameEngine.h"
 #include "PlayerClass.h"
+
 
 namespace  ImpossibleBattleBoss {
   class World : public olc::PixelGameEngine
@@ -13,6 +16,7 @@ namespace  ImpossibleBattleBoss {
       {
         sAppName = "Impossible Boss Battle";
       }
+
       bool OnUserCreate() override;
       bool OnUserUpdate(float fElapsedTime) override;
   };
