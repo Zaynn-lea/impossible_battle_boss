@@ -9,7 +9,7 @@ using namespace ImpossibleBattleBoss;
 
 bool World::OnUserCreate()
 {
-  player = cPlayer();
+  player = cPlayer(this);
 
   return true;
 }
@@ -19,7 +19,7 @@ bool World::OnUserUpdate(float fElapsedTime)
 {
   Clear(olc::BLACK);
 
-  player.DrawPlayer(this);
+  player.DrawPlayer();
 
   player.updateCoord(fElapsedTime);
 

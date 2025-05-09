@@ -7,42 +7,30 @@
 using namespace ImpossibleBattleBoss;
 
 
-cPlayer::cPlayer()
+cPlayer::cPlayer() {}
+
+cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite>> * sprites)
 {
-	idleSprite = new olc::Sprite("../assests/proj1_IA.png");
-	jumpSprite = new olc::Sprite("../assests/projsaut_IA.png");
+	this->pos	= spawnCoords;
+	this->sprites	= sprites;
+}
 
-	v2Coord = olc::vi2d(0, 0);
+cPlayer::~cPlayer() {}
 
-	iXsize = 40;
-	iYsize = 80;
 
-	iXmax = X_MAX - iXsize;
-	iYmax = Y_MAX - iYsize;
+PlayerState   cPlayer::getState()		{ return state; }
+olc::Sprite * cPlayer::getCurrentSprite()	{ return sprites[state][currentSprite]; }
+
+void cPlayer::setState(PlayerState newState)
+{
+	animationCounter = 0;
+	animationSpeed = 0;	// TODO
+
+	state = newState;
 }
 
 
-cPlayer::~cPlayer(){}
-
-
-bool cPlayer::DrawPlayer(olc::PixelGameEngine * pge)
+void cPlayer::update(olc::HWButton key, float deltaTime)
 {
-	pge->SetPixelMode(olc::Pixel::ALPHA);
-
-	pge->DrawSprite(v2Coord, idleSprite);
-
-	pge->SetPixelMode(olc::Pixel::NORMAL);
-
-	return true;
-}
-
-
-void cPlayer::updateCoord(float fElapsedTime)
-{
-	if (v2Coord.y <= iYmax)
-	{
-		v2Coord.y += GRAVITY * fElapsedTime;
-		if (v2Coord.y > iYmax)
-			v2Coord.y = iYmax;
-	}
+	// TODO
 }

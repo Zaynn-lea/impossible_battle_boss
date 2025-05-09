@@ -49,7 +49,7 @@ namespace ImpossibleBattleBoss
 		void setSprite(olc::Sprite * newSprite);
 
 	public:
-		bool isColliding(Entity other);
+		bool isColliding(cEntity other);
 	};
 };
 

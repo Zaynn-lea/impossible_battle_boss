@@ -2,7 +2,7 @@
 #pragma once
 
 
-#include "PixelGameEngine.h"
+#include "olcPixelGameEngine.h"
 
 
 namespace ImpossibleBattleBoss
@@ -15,5 +15,5 @@ namespace ImpossibleBattleBoss
 
 	public:
 		// Virtual function which HAVE TO be re-implemented in each derived classes
-		olc::Sprite * getCurrentSprite() = 0;
+		virtual olc::Sprite * getCurrentSprite() = 0;
 };

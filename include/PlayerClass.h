@@ -1,27 +1,44 @@
 
 #pragma once
 
+
+#include "Animable.h"
+#include "Entity.h"
 #include "olcPixelGameEngine.h"
 
 
-namespace  ImpossibleBattleBoss {
-  class cPlayer
+namespace ImpossibleBattleBoss
+{
+  enum PlayerState
+  {
+    IDLE,
+    ATTACKING,
+    WALKIN,
+    JUMPING,
+    HURT
+  };
+
+  class cPlayer : public cEntity, cAnimable
   {
     public:
       cPlayer();
+      cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite>> * sprites);
       ~cPlayer();
 
     private:
-      olc::Sprite * idleSprite;
-      olc::Sprite * jumpSprite;
-      olc::vi2d     v2Coord;
+      PlayerState state;
 
-      int iXmax,  iYmax;
-      int iXsize, iYsize;
+      std::map<PlayerState, std::vector<olc::Sprite>> * sprites;
+
+      olc::vi2d velocity;
 
     public:
-      bool DrawPlayer(olc::PixelGameEngine * pge);
+      PlayerState   getState();
+      olc::Sprite * getCurrentSprite();
 
-      void updateCoord(float fElapsedTime);
+      void setState(PlayerState state);
+
+    public:
+      void update(olc::HWButton key, float deltaTime);
   };
 };

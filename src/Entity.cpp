@@ -21,13 +21,13 @@ olc::vi2d	cEntity::getPos()	{ return pos; }
 olc::Sprite *	cEntity::getSprite()	{ return sprite; }
 
 
-void setHitbox(Hitbox * newHitbox)	{ hitbox = newHitbox; }
-void setHP(int newHP)			{ HP	 = newHP; }
-void setPos(olc::vi2d newPos)		{ pos	 = newPos; }
-void setSprite(olc::Sprite * newSprite)	{ sprite = newSprite;}
+void cEntity::setHitbox(Hitbox * newHitbox)	 { hitbox = newHitbox; }
+void cEntity::setHP(int newHP)			 { HP	  = newHP; }
+void cEntity::setPos(olc::vi2d newPos)		 { pos	  = newPos; }
+void cEntity::setSprite(olc::Sprite * newSprite) { sprite = newSprite;}
 
 
-bool cEntity::isColiding(Entity other)
+bool cEntity::isColiding(cEntity other)
 {
 	// TODO
 }
