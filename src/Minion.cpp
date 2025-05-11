@@ -6,12 +6,12 @@
 using namespace ImpossibleBattleBoss;
 
 
-cMinion::cMinion() {}
+cMinion::cMinion() : cEntity() {}
 
 cMinion::cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Sprite>> * sprites)
+	: cEntity(spawnPos, {spawnPos, spawnPos + {sprites[0].width, sprites[0].height}}, sprites[0], MINION)
 {
-	pos		= spawnPos;
-	this->sprites	= sprites;
+	this->sprites = sprites;
 }
 
 

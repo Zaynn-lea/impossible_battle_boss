@@ -16,4 +16,5 @@ namespace ImpossibleBattleBoss
 	public:
 		// Virtual function which HAVE TO be re-implemented in each derived classes
 		virtual olc::Sprite * getCurrentSprite() = 0;
+	};
 };
