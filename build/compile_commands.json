@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
+  "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/PlayerClass.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/PlayerClass.cpp",
+  "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/PlayerClass.cpp"
+},
+{
+  "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
+  "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/engine.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp",
+  "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp"
+},
+{
+  "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
+  "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/isColliding.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/isColliding.cpp",
+  "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/isColliding.cpp"
+},
+{
+  "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
+  "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/main.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/main.cpp",
+  "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/main.cpp"
+}
+]
