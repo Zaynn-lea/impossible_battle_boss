@@ -177,6 +177,30 @@ src/engine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/engine.cpp.s
 .PHONY : src/engine.cpp.s
 
+src/isColliding.o: src/isColliding.cpp.o
+.PHONY : src/isColliding.o
+
+# target to build an object file
+src/isColliding.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/isColliding.cpp.o
+.PHONY : src/isColliding.cpp.o
+
+src/isColliding.i: src/isColliding.cpp.i
+.PHONY : src/isColliding.i
+
+# target to preprocess a source file
+src/isColliding.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/isColliding.cpp.i
+.PHONY : src/isColliding.cpp.i
+
+src/isColliding.s: src/isColliding.cpp.s
+.PHONY : src/isColliding.s
+
+# target to generate assembly for a file
+src/isColliding.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/isColliding.cpp.s
+.PHONY : src/isColliding.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -216,6 +240,9 @@ help:
 	@echo "... src/engine.o"
 	@echo "... src/engine.i"
 	@echo "... src/engine.s"
+	@echo "... src/isColliding.o"
+	@echo "... src/isColliding.i"
+	@echo "... src/isColliding.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
