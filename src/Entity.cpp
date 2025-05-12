@@ -1,10 +1,14 @@
 
+
 #include "config.h"
 #include "Entity.h"
 #include "olcPixelGameEngine.h"
 
 namespace ImpossibleBattleBoss
 {
+
+using namespace ImpossibleBattleBoss;
+
 
   cEntity::~cEntity(){} 
 
