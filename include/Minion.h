@@ -11,8 +11,8 @@ namespace ImpossibleBattleBoss
 {
 	enum MinionState
 	{
-		ALIVE,
-		DYING
+		ALIVE_MINION,
+		DYING_MINION
 	};
 
 
@@ -30,6 +30,6 @@ namespace ImpossibleBattleBoss
 	public:
 		olc::Sprite * getCurrentSprite();
 
-		void update(cPlayer p, std::vector<std::vecto<cEntity>> * map, float deltaTime);
+		void update(cPlayer p, std::vector<std::vector<cEntity>> * map, float deltaTime);
 	};
 };

@@ -11,11 +11,11 @@ namespace ImpossibleBattleBoss
 {
   enum PlayerState
   {
-    IDLE,
-    ATTACKING,
-    WALKIN,
-    JUMPING,
-    HURT
+    IDLE_PLAYER,
+    ATTACKING_PLAYER,
+    WALKIN_PLAYER,
+    JUMPING_PLAYER,
+    HURT_PLAYER
   };
 
   class cPlayer : public cEntity, cAnimable

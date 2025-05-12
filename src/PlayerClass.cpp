@@ -10,10 +10,10 @@ using namespace ImpossibleBattleBoss;
 cPlayer::cPlayer() : cEntity() {}
 
 cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites)
-	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, spawnCoords.x + (*sprites)[IDLE][0]->width, spawnCoords.y + (*sprites)[IDLE][0]->height), (*sprites)[IDLE][0], PLAYER)
+	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, spawnCoords.x + (*sprites)[IDLE_PLAYER][0]->width, spawnCoords.y + (*sprites)[IDLE_PLAYER][0]->height), (*sprites)[IDLE_PLAYER][0], PLAYER)
 {
 	this->sprites = sprites;
-	state	      = IDLE;
+	state	      = IDLE_PLAYER;
 }
 
 cPlayer::~cPlayer() {}

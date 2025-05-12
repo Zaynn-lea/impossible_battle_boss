@@ -2,7 +2,7 @@
 #include "Boss.h"
 #include "config.h"
 #include "olcPixelGameEngine.h"
-#include "Player.h"
+#include "PlayerClass.h"
 
 
 using namespace ImpossibleBattleBoss;
@@ -16,6 +16,8 @@ cBoss::cBoss(std::map<BossState, std::vector<olc::Sprite>> * sprites)
 	this.sprites	= sprites;
 	idleTime	= 0;
 }
+
+cBoss::~cBoss() {}
 
 
 olc::Sprite cBoss::getCurrentSprite()

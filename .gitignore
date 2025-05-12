@@ -33,6 +33,7 @@
 
 # Temporaries
 *.swp
+*.err
 
 CMakeCache.txt
 CMakeFiles/

@@ -14,8 +14,10 @@ cMinion::cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Spri
 	this->sprites = sprites;
 }
 
+cMinion::~cMinion() : {}
 
-olc::Sprite cMinion::getCurrentSprite()	{  return sprites[state][currentSprite];  }	// TOOD : curretSprite ?
+
+olc::Sprite cMinion::getCurrentSprite()	{  return (*sprites)[state][0];  }	// TOOD : replace 0
 
 
 void cMinion::update(cPlayer p, std::vector<std::vector<cEntity>> * map, float deltaTime)

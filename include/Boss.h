@@ -6,17 +6,17 @@
 #include "Animable.h"
 #include "Entity.h"
 #include "olcPixelGameEngine.h"
-#include "Player.h"
+#include "PlayerClass.h"
 
 
 namespace ImpossibleBattleBoss
 {
 	enum BossState
 	{
-		IDLE,
-		ATTACKING,
-		HURT,
-		MSPAWNING
+		IDLE_BOSS,
+		ATTACKING_BOSS,
+		HURT_BOSS,
+		MSPAWNING_BOSS
 	};
 
 
@@ -34,8 +34,8 @@ namespace ImpossibleBattleBoss
 
 
 	public:
-		olc::Srpite getCurrentSprite();
+		olc::Sprite * getCurrentSprite();
 
 		void update(cPlayer p, float deltaTime);
-	}
+	};
 };
