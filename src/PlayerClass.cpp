@@ -9,8 +9,8 @@ using namespace ImpossibleBattleBoss;
 
 cPlayer::cPlayer() : cEntity() {}
 
-cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite>> * sprites)
-	: cEntity(spawnCoords, {{spawnCoords}, {spawnCoords.x + sprites[IDLE].width, spawnCoords.y + sprites[IDLE].height}}, sprites[IDLE], PLAYER)
+cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites)
+	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, spawnCoords.x + (*sprites)[IDLE][0]->width, spawnCoords.y + (*sprites)[IDLE][0]->height), (*sprites)[IDLE][0], PLAYER)
 {
 	this->sprites = sprites;
 	state	      = IDLE;
@@ -21,7 +21,7 @@ cPlayer::~cPlayer() {}
 
 
 PlayerState   cPlayer::getState()		{ return state; }
-olc::Sprite * cPlayer::getCurrentSprite()	{ /* return sprites[state][currentSprite]; TODO */ }
+olc::Sprite * cPlayer::getCurrentSprite()	{ return (*sprites)[state][0]; /* TODO : replace the 0 */ }
 
 void cPlayer::setState(PlayerState newState)
 {

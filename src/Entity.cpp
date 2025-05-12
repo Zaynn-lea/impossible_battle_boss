@@ -4,6 +4,25 @@
 #include "PixelGameEngine.h"
 
 
+Hitbox createHitBox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight)
+{
+	Hitbox hitbox = new Hitbox;
+
+	olc::vi2d topLeft;
+	topLeft.x = xTopLeft;
+	topLeft.y = yTopLeft;
+
+	olc::vi2d botRight;
+	botRight.x = xBottomRight;
+	botRight.y = yBottomRight;
+
+	hitbox->topLeft  = topLeft;
+	hitbox->botRight = botRight;
+
+	return hitbox;
+}
+
+
 cEntity::cEntity() {}
 
 cEntity::cEntity(olc::vi2d spawnCoords, Hitbox hitbox, olc::Sprite * sprite, EntityType type)

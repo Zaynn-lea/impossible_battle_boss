@@ -22,13 +22,13 @@ namespace ImpossibleBattleBoss
   {
     public:
       cPlayer();
-      cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite>> * sprites);
+      cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites);
       ~cPlayer();
 
     private:
       PlayerState state;
 
-      std::map<PlayerState, std::vector<olc::Sprite>> * sprites;
+      std::map<PlayerState, std::vector<olc::Sprite *>> * sprites;
 
       olc::vi2d velocity;
 

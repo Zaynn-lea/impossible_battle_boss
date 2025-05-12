@@ -6,11 +6,14 @@
 
 namespace ImpossibleBattleBoss
 {
-	struct Hitbox
+	struct _hitbox
 	{
 		olc::vi2d topLeft;
 		olc::vi2d botRight;
 	};
+	typedef struct _hitbox * Hitbox;
+
+	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight);
 
 
 	enum EntityType
@@ -31,19 +34,19 @@ namespace ImpossibleBattleBoss
 		~cEntity();
 
 	private:
-		Hitbox *	hitbox;
+		Hitbox 		hitbox;
 		int		HP;
 		olc::vi2d	pos;
 		olc::Sprite *	sprite;
 		EntityType	type;
 
 	public:
-		Hitbox *	getHitbox();
+		Hitbox 		getHitbox();
 		int		getHP();
 		olc::vi2d 	getPos();
 		olc::Sprite *	getSprite();
 
-		void setHitbox(Hitbox * newHitbox);
+		void setHitbox(Hitbox newHitbox);
 		void setHP(int newHP);
 		void setPos(olc::vi2d newPos);
 		void setSprite(olc::Sprite * newSprite);
