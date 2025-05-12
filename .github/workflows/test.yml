@@ -1,0 +1,21 @@
+name: Build
+on:
+  push:
+
+jobs:
+  test_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install deps
+        run: | 
+           sudo apt-get update
+           sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev libpng-dev
+
+      - name: Check out repository code
+        uses: actions/checkout@v3
+
+      - name: Build Project
+        uses: threeal/cmake-action@v2.1.0
+        with:
+          source-dir: .
+          build-dir: build
