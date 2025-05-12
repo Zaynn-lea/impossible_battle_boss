@@ -24,12 +24,12 @@ namespace ImpossibleBattleBoss
 	{
 	public:
 		cBoss();
-		cBoss(std::map<BossState, std::vector<olc::Sprite>> * sprites);
+		cBoss(std::map<BossState, std::vector<olc::Sprite *>> * sprites);
 		~cBoss();
 
 	private:
 		BossState state;
-		std::map<BossState, std::vector<olc::Sprite>> * sprites;
+		std::map<BossState, std::vector<olc::Sprite *>> * sprites;
 		int idleTime;
 
 

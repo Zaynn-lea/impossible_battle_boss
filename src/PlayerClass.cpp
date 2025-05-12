@@ -1,5 +1,6 @@
 
 #include "config.h"
+#include "Entity.h"
 #include "PlayerClass.h"
 #include "olcPixelGameEngine.h"
 
@@ -36,3 +37,4 @@ void cPlayer::update(olc::HWButton key, float deltaTime)
 {
 	// TODO
 }
+

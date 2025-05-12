@@ -8,16 +8,17 @@ using namespace ImpossibleBattleBoss;
 
 cMinion::cMinion() : cEntity() {}
 
-cMinion::cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Sprite>> * sprites)
-	: cEntity(spawnPos, {spawnPos, spawnPos + {sprites[0].width, sprites[0].height}}, sprites[0], MINION)
+cMinion::cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Sprite *>> * sprites)
+	: cEntity(spawnPos, createHitbox(spawnPos.x, spawnPos.y, spawnPos.x + (*sprites)[ALIVE_MINION][0]->width, spawnPos.y + (*sprites)[ALIVE_MINION][0]->height), (*sprites)[ALIVE_MINION][0], MINION)
 {
-	this->sprites = sprites;
+	this->sprites	= sprites;
+	state 		= ALIVE_MINION;
 }
 
-cMinion::~cMinion() : {}
+cMinion::~cMinion() {}
 
 
-olc::Sprite cMinion::getCurrentSprite()	{  return (*sprites)[state][0];  }	// TOOD : replace 0
+olc::Sprite * cMinion::getCurrentSprite()	{  return (*sprites)[state][0];  }	// TODO : replace 0
 
 
 void cMinion::update(cPlayer p, std::vector<std::vector<cEntity>> * map, float deltaTime)

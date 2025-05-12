@@ -129,6 +129,78 @@ ImpossibleBattleBoss/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/build
 .PHONY : ImpossibleBattleBoss/fast
 
+src/Boss.o: src/Boss.cpp.o
+.PHONY : src/Boss.o
+
+# target to build an object file
+src/Boss.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.o
+.PHONY : src/Boss.cpp.o
+
+src/Boss.i: src/Boss.cpp.i
+.PHONY : src/Boss.i
+
+# target to preprocess a source file
+src/Boss.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.i
+.PHONY : src/Boss.cpp.i
+
+src/Boss.s: src/Boss.cpp.s
+.PHONY : src/Boss.s
+
+# target to generate assembly for a file
+src/Boss.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.s
+.PHONY : src/Boss.cpp.s
+
+src/Entity.o: src/Entity.cpp.o
+.PHONY : src/Entity.o
+
+# target to build an object file
+src/Entity.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Entity.cpp.o
+.PHONY : src/Entity.cpp.o
+
+src/Entity.i: src/Entity.cpp.i
+.PHONY : src/Entity.i
+
+# target to preprocess a source file
+src/Entity.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Entity.cpp.i
+.PHONY : src/Entity.cpp.i
+
+src/Entity.s: src/Entity.cpp.s
+.PHONY : src/Entity.s
+
+# target to generate assembly for a file
+src/Entity.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Entity.cpp.s
+.PHONY : src/Entity.cpp.s
+
+src/Minion.o: src/Minion.cpp.o
+.PHONY : src/Minion.o
+
+# target to build an object file
+src/Minion.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Minion.cpp.o
+.PHONY : src/Minion.cpp.o
+
+src/Minion.i: src/Minion.cpp.i
+.PHONY : src/Minion.i
+
+# target to preprocess a source file
+src/Minion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Minion.cpp.i
+.PHONY : src/Minion.cpp.i
+
+src/Minion.s: src/Minion.cpp.s
+.PHONY : src/Minion.s
+
+# target to generate assembly for a file
+src/Minion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Minion.cpp.s
+.PHONY : src/Minion.cpp.s
+
 src/PlayerClass.o: src/PlayerClass.cpp.o
 .PHONY : src/PlayerClass.o
 
@@ -210,6 +282,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ImpossibleBattleBoss"
+	@echo "... src/Boss.o"
+	@echo "... src/Boss.i"
+	@echo "... src/Boss.s"
+	@echo "... src/Entity.o"
+	@echo "... src/Entity.i"
+	@echo "... src/Entity.s"
+	@echo "... src/Minion.o"
+	@echo "... src/Minion.i"
+	@echo "... src/Minion.s"
 	@echo "... src/PlayerClass.o"
 	@echo "... src/PlayerClass.i"
 	@echo "... src/PlayerClass.s"
