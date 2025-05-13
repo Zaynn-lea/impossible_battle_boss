@@ -42,6 +42,15 @@ using namespace ImpossibleBattleBoss;
 	}
 
 	Hitbox cEntity::getHitbox() { return hitbox; }
+	Hitbox cEntity::getAbsHB()
+	{
+		Hitbox absHb = new _hitbox();
+
+		absHb->topLeft  = pos + hitbox->topLeft;
+		absHb->botRight = pos + hitbox->botRight;
+
+		return absHb;
+	}
 	int cEntity::getHP() { return HP; }
 	olc::vi2d cEntity::getPos() { return pos; }
 	olc::Sprite *cEntity::getSprite() { return sprite; }
@@ -57,11 +66,13 @@ using namespace ImpossibleBattleBoss;
 
 		olc::vi2d selfStart, selfEnd, compStart, compEnd;
 
+		Hitbox absHitbox;
 
-		selfStart = this->pos + this->hitbox->topLeft;
-		selfEnd   = this->pos + this->hitbox->botRight;
-		compStart = other->getPos() + other->getHitbox()->topLeft;
-		compEnd   = other->getPos() + other->getHitbox()->botRight;
+
+		selfStart = getAbsHB()->topLeft;
+		selfEnd   = getAbsHB()->botRight;
+		compStart = other->getAbsHB()->topLeft;
+		compEnd   = other->getAbsHB()->botRight;
 
 		vertAlign = std::max(selfStart.x, compStart.x) <= std::min(selfEnd.x, compEnd.x);
 		horzAlign = std::max(selfStart.y, compStart.y) <= std::min(selfEnd.y, compEnd.y);

@@ -41,13 +41,12 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 
 
 	if (keys[olc::Key::Q].bHeld)
-		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getPos().x + getHitbox()->topLeft.x));
+		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB()->topLeft.x));
 
 	if (keys[olc::Key::D].bHeld)
-		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getPos().x - getHitbox()->botRight.x));
+		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB()->botRight.x));
 
 
 	setPos(getPos() + mouvment);
 }
 
-// TODO : getAbsHitbox()
