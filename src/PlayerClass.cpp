@@ -35,6 +35,16 @@ void cPlayer::setState(PlayerState newState)
 
 void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 {
-	// TODO
+	olc::vi2d mouvment = {0, 0};
+
+
+	if (keys[olc::Key::Q].bPressed)
+		mouvment.x -= PLAYER_SPEED * deltaTime;
+
+	if (keys[olc::Key::D].bPressed)
+		mouvment.x += PLAYER_SPEED * deltaTime;
+
+
+	setPos(getPos() + mouvment);
 }
 
