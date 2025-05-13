@@ -1,4 +1,5 @@
 
+
 #pragma once
 
 #include "olcPixelGameEngine.h"
@@ -12,7 +13,9 @@ namespace  ImpossibleBattleBoss {
   {
     private:
       cBoss   boss;
+
       cPlayer player;
+      std::vector<olc::Key> controls;
 
       std::vector<cMinion> minions;
 

@@ -33,7 +33,7 @@ void cPlayer::setState(PlayerState newState)
 }
 
 
-void cPlayer::update(olc::HWButton key, float deltaTime)
+void cPlayer::update(std::vector<olc::Key> key, float deltaTime)
 {
 	// TODO
 }
