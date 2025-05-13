@@ -13,7 +13,7 @@ namespace ImpossibleBattleBoss
   {
     IDLE_PLAYER,
     ATTACKING_PLAYER,
-    WALKIN_PLAYER,
+    WALKING_PLAYER,
     JUMPING_PLAYER,
     HURT_PLAYER
   };
@@ -27,6 +27,7 @@ namespace ImpossibleBattleBoss
 
     private:
       PlayerState state;
+      bool	  isKeyPressed;
 
       std::map<PlayerState, std::vector<olc::Sprite *>> * sprites;
 

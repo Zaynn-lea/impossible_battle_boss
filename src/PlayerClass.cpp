@@ -17,6 +17,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 {
 	this->sprites = sprites;
 	state	      = IDLE_PLAYER;
+	isKeyPressed  = false;
 }
 
 cPlayer::~cPlayer() {}
@@ -41,11 +42,30 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 
 
 	if (keys[olc::Key::Q].bHeld)
+	{
 		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB()->topLeft.x));
 
-	if (keys[olc::Key::D].bHeld)
+		if (!isKeyPressed)
+		{
+			setState(WALKING_PLAYER);
+			isKeyPressed = true;
+		}
+	}
+	else if (keys[olc::Key::D].bHeld)
+	{
 		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB()->botRight.x));
 
+		if (!isKeyPressed)
+		{
+			setState(WALKING_PLAYER);
+			isKeyPressed = true;
+		}
+	}
+	else if (isKeyPressed)
+	{
+		setState(IDLE_PLAYER);
+		isKeyPressed = false;
+	}
 
 	setPos(getPos() + mouvment);
 
