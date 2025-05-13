@@ -10,23 +10,40 @@
 using namespace ImpossibleBattleBoss;
 
 
+void World::makePlayerSprites()
+{
+	std::vector<olc::Sprite *> tempSprites;
+
+
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-4.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_PLAYER, tempSprites) );
+}
+
+
+void World::makePlayerControls()
+{
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Z,	GetKey(olc::Key::Z)) );
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Q,	GetKey(olc::Key::Q)) );
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::S,	GetKey(olc::Key::S)) );
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::D,	GetKey(olc::Key::D)) );
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::SPACE, GetKey(olc::Key::SPACE)) );
+}
+
+
 bool World::OnUserCreate()
 {
-  std::vector<olc::Sprite *> tempSprites;
-
-
   boss = cBoss();
 
-  tempSprites.push_back(new olc::Sprite("../assests/proj1_IA.png"));
-  playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_PLAYER, tempSprites) );
+
+  makePlayerSprites();
+  makePlayerControls();
 
   player = cPlayer({10, 10}, &playerSprites);
-
-  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Z,	GetKey(olc::Key::Z)) );
-  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Q,	GetKey(olc::Key::Q)) );
-  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::S,	GetKey(olc::Key::S)) );
-  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::D,	GetKey(olc::Key::D)) );
-  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::SPACE, GetKey(olc::Key::SPACE)) );
 
 
   return true;
