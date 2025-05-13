@@ -25,6 +25,10 @@ namespace  ImpossibleBattleBoss {
 
       std::vector<std::vector<cEntity>> * map;
 
+    private:
+      void makePlayerSprites();
+      void makePlayerControls();
+
     public:
       World()
       {

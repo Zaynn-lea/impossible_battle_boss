@@ -10,8 +10,9 @@ namespace ImpossibleBattleBoss
 	class cAnimable
 	{
 	public:
-		int animationCounter	= 0;
-		int animationSpeed	= 0;
+		int   animationCounter	= 0;
+		int   animationSpeed	= 0;
+		float animationTime	= 0;
 
 	public:
 		// Virtual function which HAVE TO be re-implemented in each derived classes

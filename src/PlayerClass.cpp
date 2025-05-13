@@ -24,12 +24,12 @@ cPlayer::~cPlayer() {}
 
 
 PlayerState   cPlayer::getState()		{ return state; }
-olc::Sprite * cPlayer::getCurrentSprite()	{ return (*sprites)[state][0]; /* TODO : replace the 0 */ }
+olc::Sprite * cPlayer::getCurrentSprite()	{ return (*sprites)[state][cAnimable::animationCounter]; }
 
 void cPlayer::setState(PlayerState newState)
 {
 	cAnimable::animationCounter = 0;
-	cAnimable::animationSpeed   = 0;	// TODO
+	cAnimable::animationSpeed   = 0;
 
 	state = newState;
 }
@@ -48,5 +48,18 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 
 
 	setPos(getPos() + mouvment);
+
+
+	// Update the sprite :
+
+	cAnimable::animationTime += deltaTime;
+
+	if (cAnimable::animationTime >= 0.1)
+	{
+		cAnimable::animationCounter++;
+		cAnimable::animationCounter = cAnimable::animationCounter % (*sprites)[state].size();
+
+		cAnimable::animationTime = 0;
+	}
 }
 
