@@ -42,6 +42,7 @@ namespace ImpossibleBattleBoss
 
 	public:
 		Hitbox 		getHitbox();
+		Hitbox 		getAbsHB();
 		int		getHP();
 		olc::vi2d 	getPos();
 		olc::Sprite *	getSprite();
