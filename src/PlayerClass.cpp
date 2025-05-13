@@ -47,7 +47,7 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 
 		if (!isKeyPressed)
 		{
-			setState(WALKING_PLAYER);
+			setState(WALKING_LEFT_PLAYER);
 			isKeyPressed = true;
 		}
 	}
@@ -57,7 +57,7 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 
 		if (!isKeyPressed)
 		{
-			setState(WALKING_PLAYER);
+			setState(WALKING_RIGHT_PLAYER);
 			isKeyPressed = true;
 		}
 	}

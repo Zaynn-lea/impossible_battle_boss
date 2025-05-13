@@ -25,16 +25,29 @@ void World::makePlayerSprites()
 
 	tempSprites.clear();
 
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-0.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-1.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-2.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-3.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-4.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-5.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-6.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-7.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-5.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-6.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-7.png"));
 
-	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_PLAYER, tempSprites) );
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_LEFT_PLAYER, tempSprites) );
+
+	tempSprites.clear();
+
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-5.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-6.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-7.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_RIGHT_PLAYER, tempSprites) );
 }
 
 

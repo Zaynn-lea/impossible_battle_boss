@@ -13,7 +13,8 @@ namespace ImpossibleBattleBoss
   {
     IDLE_PLAYER,
     ATTACKING_PLAYER,
-    WALKING_PLAYER,
+    WALKING_RIGHT_PLAYER,
+    WALKING_LEFT_PLAYER,
     JUMPING_PLAYER,
     HURT_PLAYER
   };
