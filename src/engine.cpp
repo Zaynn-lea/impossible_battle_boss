@@ -22,6 +22,19 @@ void World::makePlayerSprites()
 	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-4.png"));
 
 	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_PLAYER, tempSprites) );
+
+	tempSprites.clear();
+
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-5.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-6.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche-7.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_PLAYER, tempSprites) );
 }
 
 

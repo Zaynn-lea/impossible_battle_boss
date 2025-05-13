@@ -9,4 +9,4 @@
 
 
 // Player mouvement
-#define PLAYER_SPEED 500
+#define PLAYER_SPEED 420	// nice
