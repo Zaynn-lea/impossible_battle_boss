@@ -8,5 +8,5 @@
 #define	Y_MAX	450
 
 
-// Physic engine
-#define GRAVITY	450.0
+// Player mouvement
+#define PLAYER_SPEED 1

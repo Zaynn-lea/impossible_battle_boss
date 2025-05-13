@@ -13,11 +13,15 @@ namespace  ImpossibleBattleBoss {
   {
     private:
       cBoss   boss;
+      std::map<BossState, std::vector<olc::Sprite *>> * bossSprites;
+
 
       cPlayer player;
-      std::map<olc::Key, olc::HWButton> controls;
+      std::map<olc::Key,    olc::HWButton>		  controls;
+      std::map<PlayerState, std::vector<olc::Sprite *>> playerSprites;
 
       std::vector<cMinion> minions;
+      std::map<MinionState, std::vector<olc::Sprite *>> * minionSprites;
 
       std::vector<std::vector<cEntity>> * map;
 

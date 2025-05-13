@@ -1,4 +1,5 @@
 
+#include "config.h"
 #include "engine.h"
 #include "olcPixelGameEngine.h"
 #include "PlayerClass.h"
@@ -11,15 +12,21 @@ using namespace ImpossibleBattleBoss;
 
 bool World::OnUserCreate()
 {
-  boss	 = cBoss();
+  std::vector<olc::Sprite *> tempSprites;
 
-  player = cPlayer();
 
-  controls[olc::Key::Z]	    = GetKey(olc::Key::Z);
-  controls[olc::Key::Q]	    = GetKey(olc::Key::Q);
-  controls[olc::Key::S]	    = GetKey(olc::Key::S);
-  controls[olc::Key::D]	    = GetKey(olc::Key::D);
-  controls[olc::Key::SPACE] = GetKey(olc::Key::SPACE);
+  boss = cBoss();
+
+  tempSprites.push_back(new olc::Sprite("../assests/proj1_IA.png"));
+  playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_PLAYER, tempSprites) );
+
+  player = cPlayer({10, 10}, &playerSprites);
+
+  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Z,	GetKey(olc::Key::Z)) );
+  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Q,	GetKey(olc::Key::Q)) );
+  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::S,	GetKey(olc::Key::S)) );
+  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::D,	GetKey(olc::Key::D)) );
+  controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::SPACE, GetKey(olc::Key::SPACE)) );
 
 
   return true;
@@ -46,12 +53,12 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   // Render and Draw everything
 
-  DrawSprite(boss.getPos(), boss.getCurrentSprite());
+//  DrawSprite(boss.getPos(), boss.getCurrentSprite());
   // render plateform
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
-  for (int i; i < minions.size(); i++)
-    DrawSprite(minions[0].getPos(), minions[0].getCurrentSprite());
+//  for (int i; i < minions.size(); i++)
+//    DrawSprite(minions[i].getPos(), minions[i].getCurrentSprite());
 
 
   return true;
