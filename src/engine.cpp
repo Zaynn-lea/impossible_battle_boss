@@ -14,11 +14,13 @@ bool World::OnUserCreate()
   boss	 = cBoss();
 
   player = cPlayer();
-  controls.push_back(olc::Key::Z);
-  controls.push_back(olc::Key::Q);
-  controls.push_back(olc::Key::S);
-  controls.push_back(olc::Key::D);
-  controls.push_back(olc::Key::SPACE);
+
+  controls[olc::Key::Z]	    = GetKey(olc::Key::Z);
+  controls[olc::Key::Q]	    = GetKey(olc::Key::Q);
+  controls[olc::Key::S]	    = GetKey(olc::Key::S);
+  controls[olc::Key::D]	    = GetKey(olc::Key::D);
+  controls[olc::Key::SPACE] = GetKey(olc::Key::SPACE);
+
 
   return true;
 }
@@ -29,6 +31,11 @@ bool World::OnUserUpdate(float fElapsedTime)
   Clear(olc::BLACK);
 
 
+  // Update everything
+
+  for (auto const& [key, val] : controls)
+    controls[key] = GetKey(key);
+
   player.update(controls, fElapsedTime);
 
   for (int i; i < minions.size(); i++)
@@ -36,6 +43,8 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   boss.update(player, fElapsedTime);
 
+
+  // Render and Draw everything
 
   DrawSprite(boss.getPos(), boss.getCurrentSprite());
   // render plateform

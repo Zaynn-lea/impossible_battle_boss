@@ -15,7 +15,7 @@ namespace  ImpossibleBattleBoss {
       cBoss   boss;
 
       cPlayer player;
-      std::vector<olc::Key> controls;
+      std::map<olc::Key, olc::HWButton> controls;
 
       std::vector<cMinion> minions;
 
