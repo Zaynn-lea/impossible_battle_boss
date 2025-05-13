@@ -6,6 +6,8 @@
 namespace ImpossibleBattleBoss
 {
 
+  cEntity::~cEntity(){} 
+
 	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight)
 	{
 		Hitbox hitbox = new _hitbox;
