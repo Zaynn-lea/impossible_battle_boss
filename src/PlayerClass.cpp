@@ -1,4 +1,6 @@
 
+#include <algorithm>
+
 #include "config.h"
 #include "Entity.h"
 #include "PlayerClass.h"
@@ -38,13 +40,14 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 	olc::vi2d mouvment = {0, 0};
 
 
-	if (keys[olc::Key::Q].bPressed)
-		mouvment.x -= PLAYER_SPEED * deltaTime;
+	if (keys[olc::Key::Q].bHeld)
+		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getPos().x + getHitbox()->topLeft.x));
 
-	if (keys[olc::Key::D].bPressed)
-		mouvment.x += PLAYER_SPEED * deltaTime;
+	if (keys[olc::Key::D].bHeld)
+		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getPos().x - getHitbox()->botRight.x));
 
 
 	setPos(getPos() + mouvment);
 }
 
+// TODO : getAbsHitbox()

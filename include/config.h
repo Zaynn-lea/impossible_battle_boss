@@ -9,4 +9,4 @@
 
 
 // Player mouvement
-#define PLAYER_SPEED 1
+#define PLAYER_SPEED 500
