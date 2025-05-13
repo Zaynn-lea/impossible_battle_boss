@@ -47,8 +47,8 @@ bool cEntity::isColliding(cEntity * other)
 	compStart = other->getPos() + other->getHitbox()->topLeft;
 	compEnd   = other->getPos() + other->getHitbox()->botRight;
 
-	vertAlign = std::max(selfStart.x, compStart.x) > std::min(selfEnd.x, compEnd.x);
-	vertAlign = std::max(selfStart.y, compStart.y) > std::min(selfEnd.y, compEnd.y);
+	vertAlign = std::max(selfStart.x, compStart.x) <= std::min(selfEnd.x, compEnd.x);
+	vertAlign = std::max(selfStart.y, compStart.y) <= std::min(selfEnd.y, compEnd.y);
 
 
 	return vertAlign && horzAlign;
