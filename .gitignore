@@ -33,8 +33,10 @@
 
 # Temporaries
 *.swp
+*.err
 
 CMakeCache.txt
 CMakeFiles/
 *.cmake
 ImpossibleBattleBoss
+build/**
