@@ -1,4 +1,5 @@
 
+#include <algorithm>
 
 #include "config.h"
 #include "Entity.h"
@@ -52,7 +53,21 @@ using namespace ImpossibleBattleBoss;
 
 	bool cEntity::isColliding(cEntity *other)
 	{
-		return false; // TODO
+		bool vertAlign, horzAlign;
+
+		olc::vi2d selfStart, selfEnd, compStart, compEnd;
+
+
+		selfStart = this->pos + this->hitbox->topLeft;
+		selfEnd   = this->pos + this->hitbox->botRight;
+		compStart = other->getPos() + other->getHitbox()->topLeft;
+		compEnd   = other->getPos() + other->getHitbox()->botRight;
+
+		vertAlign = std::max(selfStart.x, compStart.x) <= std::min(selfEnd.x, compEnd.x);
+		horzAlign = std::max(selfStart.y, compStart.y) <= std::min(selfEnd.y, compEnd.y);
+
+
+		return vertAlign && horzAlign;
 	}
 
 };
