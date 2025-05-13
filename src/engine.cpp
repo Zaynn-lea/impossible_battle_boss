@@ -12,7 +12,13 @@ using namespace ImpossibleBattleBoss;
 bool World::OnUserCreate()
 {
   boss	 = cBoss();
+
   player = cPlayer();
+  controls.push_back(olc::Key::Z);
+  controls.push_back(olc::Key::Q);
+  controls.push_back(olc::Key::S);
+  controls.push_back(olc::Key::D);
+  controls.push_back(olc::Key::SPACE);
 
   return true;
 }
@@ -23,7 +29,7 @@ bool World::OnUserUpdate(float fElapsedTime)
   Clear(olc::BLACK);
 
 
-  player.update(GetKey(olc::Key::A), fElapsedTime);
+  player.update(controls, fElapsedTime);
 
   for (int i; i < minions.size(); i++)
     minions[i].update(player, map, fElapsedTime);

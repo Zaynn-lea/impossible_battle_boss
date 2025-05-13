@@ -39,6 +39,6 @@ namespace ImpossibleBattleBoss
       void setState(PlayerState state);
 
     public:
-      void update(olc::HWButton key, float deltaTime);
+      void update(std::vector<olc::Key> keys, float deltaTime);
   };
 };
