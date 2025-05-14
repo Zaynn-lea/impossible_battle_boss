@@ -11,8 +11,10 @@ namespace ImpossibleBattleBoss
 {
   enum PlayerState
   {
-    IDLE_PLAYER,
-    ATTACKING_PLAYER,
+    IDLE_RIGHT_PLAYER,
+    IDLE_LEFT_PLAYER,
+    ATTACKING_RIGHT_PLAYER,
+    ATTACKING_LEFT_PLAYER,
     WALKING_RIGHT_PLAYER,
     WALKING_LEFT_PLAYER,
     JUMPING_PLAYER,
@@ -29,6 +31,7 @@ namespace ImpossibleBattleBoss
     private:
       PlayerState state;
       bool	  isKeyPressed;
+      bool	  isRight;
 
       std::map<PlayerState, std::vector<olc::Sprite *>> * sprites;
 

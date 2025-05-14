@@ -13,11 +13,12 @@ using namespace ImpossibleBattleBoss;
 cPlayer::cPlayer() : cEntity() {}
 
 cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites)
-	: cEntity(spawnCoords, createHitbox(0, 0, (*sprites)[IDLE_PLAYER][0]->width, (*sprites)[IDLE_PLAYER][0]->height), (*sprites)[IDLE_PLAYER][0], PLAYER)
+	: cEntity(spawnCoords, createHitbox(0, 0, (*sprites)[IDLE_RIGHT_PLAYER][0]->width, (*sprites)[IDLE_RIGHT_PLAYER][0]->height), (*sprites)[IDLE_RIGHT_PLAYER][0], PLAYER)
 {
 	this->sprites = sprites;
-	state	      = IDLE_PLAYER;
+	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
+	isRight	      = true;
 }
 
 cPlayer::~cPlayer() {}
@@ -45,6 +46,8 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 	{
 		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB()->topLeft.x));
 
+		isRight = false;
+
 		if (!isKeyPressed)
 		{
 			setState(WALKING_LEFT_PLAYER);
@@ -55,6 +58,8 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 	{
 		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB()->botRight.x));
 
+		isRight = true;
+
 		if (!isKeyPressed)
 		{
 			setState(WALKING_RIGHT_PLAYER);
@@ -63,7 +68,10 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 	}
 	else if (isKeyPressed)
 	{
-		setState(IDLE_PLAYER);
+		if (isRight)
+			setState(IDLE_RIGHT_PLAYER);
+		else
+			setState(IDLE_LEFT_PLAYER);
 		isKeyPressed = false;
 	}
 
