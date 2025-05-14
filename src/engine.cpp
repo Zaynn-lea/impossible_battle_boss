@@ -15,13 +15,24 @@ void World::makePlayerSprites()
 	std::vector<olc::Sprite *> tempSprites;
 
 
-	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-0.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-1.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-2.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-3.png"));
-	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_right-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_right-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_right-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_right-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_right-4.png"));
 
-	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_PLAYER, tempSprites) );
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_RIGHT_PLAYER, tempSprites) );
+
+	tempSprites.clear();
+
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_left-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_left-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_left-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_left-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/idle_player/idle_left-4.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_LEFT_PLAYER, tempSprites) );
+
 
 	tempSprites.clear();
 
