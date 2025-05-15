@@ -1,6 +1,11 @@
 [
 {
   "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
+  "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp",
+  "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp"
+},
+{
+  "directory": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/build",
   "command": "/usr/bin/g++  -I/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include -g -std=gnu++20 -o CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.o -c /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Boss.cpp",
   "file": "/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Boss.cpp"
 },

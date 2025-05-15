@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Arena.h"
 #include "olcPixelGameEngine.h"
 #include "PlayerClass.h"
 #include "Boss.h"
@@ -23,11 +24,17 @@ namespace  ImpossibleBattleBoss {
       std::vector<cMinion> minions;
       std::map<MinionState, std::vector<olc::Sprite *>> * minionSprites;
 
+      cArena arena;
+      std::vector<olc::Sprite *> arenaSprites;
+
       std::vector<std::vector<cEntity>> * map;
 
     private:
       void makePlayerSprites();
       void makePlayerControls();
+      void makeArenaSprites();
+      std::vector<Hitbox> makeArenaHitbox();
+
 
     public:
       World()
