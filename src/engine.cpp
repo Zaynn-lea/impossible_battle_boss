@@ -1,4 +1,5 @@
 
+#include "Arena.h"
 #include "config.h"
 #include "engine.h"
 #include "olcPixelGameEngine.h"
@@ -72,6 +73,23 @@ void World::makePlayerControls()
 }
 
 
+void World::makeArenaSprites()
+{
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-0.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-1.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-2.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-3.png"));
+}
+
+
+std::vector<Hitbox> World::makeArenaHitbox()
+{
+	std::vector<Hitbox> hitboxes;
+
+	return hitboxes;
+}
+
+
 bool World::OnUserCreate()
 {
   boss = cBoss();
@@ -81,6 +99,11 @@ bool World::OnUserCreate()
   makePlayerControls();
 
   player = cPlayer({10, 10}, &playerSprites);
+
+
+  makeArenaSprites();
+
+  arena = cArena(makeArenaHitbox(), &arenaSprites);
 
 
   return true;
@@ -104,16 +127,19 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   boss.update(player, fElapsedTime);
 
+  arena.update(fElapsedTime);
+
 
   // Render and Draw everything
 
 //  DrawSprite(boss.getPos(), boss.getCurrentSprite());
-  // render plateform
+
+  DrawSprite({0, 0}, arena.getCurrentSprite());
+
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
 //  for (int i; i < minions.size(); i++)
 //    DrawSprite(minions[i].getPos(), minions[i].getCurrentSprite());
-
 
   return true;
 }

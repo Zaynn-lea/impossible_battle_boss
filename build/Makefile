@@ -129,6 +129,30 @@ ImpossibleBattleBoss/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/build
 .PHONY : ImpossibleBattleBoss/fast
 
+src/Arena.o: src/Arena.cpp.o
+.PHONY : src/Arena.o
+
+# target to build an object file
+src/Arena.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o
+.PHONY : src/Arena.cpp.o
+
+src/Arena.i: src/Arena.cpp.i
+.PHONY : src/Arena.i
+
+# target to preprocess a source file
+src/Arena.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.i
+.PHONY : src/Arena.cpp.i
+
+src/Arena.s: src/Arena.cpp.s
+.PHONY : src/Arena.s
+
+# target to generate assembly for a file
+src/Arena.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ImpossibleBattleBoss.dir/build.make CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.s
+.PHONY : src/Arena.cpp.s
+
 src/Boss.o: src/Boss.cpp.o
 .PHONY : src/Boss.o
 
@@ -282,6 +306,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ImpossibleBattleBoss"
+	@echo "... src/Arena.o"
+	@echo "... src/Arena.i"
+	@echo "... src/Arena.s"
 	@echo "... src/Boss.o"
 	@echo "... src/Boss.i"
 	@echo "... src/Boss.s"
