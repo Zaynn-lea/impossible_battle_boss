@@ -73,15 +73,6 @@ void World::makePlayerControls()
 }
 
 
-void World::makeArenaSprites()
-{
-	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-0.png"));
-	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-1.png"));
-	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-2.png"));
-	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-3.png"));
-}
-
-
 bool World::OnUserCreate()
 {
   boss = cBoss();
@@ -93,9 +84,15 @@ bool World::OnUserCreate()
   player = cPlayer({10, 10}, &playerSprites);
 
 
-  makeArenaSprites();
+  plateformario2 = cArena({0, 0}, new olc::Sprite("../assests/plateformario2.png"), PLATEFORMARIO);
+  plateformario3 = cArena({0, 0}, new olc::Sprite("../assests/plateformario3.png"), PLATEFORMARIO);
+  plateformario4 = cArena({0, 0}, new olc::Sprite("../assests/plateformario4.png"), PLATEFORMARIO);
+  plateformario5 = cArena({0, 0}, new olc::Sprite("../assests/plateformario5.png"), PLATEFORMARIO);
 
-  arena = cArena({0, 0}, &arenaSprites, PLATFORM);
+  plateform1 = cArena({0, 0}, new olc::Sprite("../assests/1.png"), PLATEFORM);
+  plateform2 = cArena({0, 0}, new olc::Sprite("../assests/2.png"), PLATEFORM);
+  plateform3 = cArena({0, 0}, new olc::Sprite("../assests/3.png"), PLATEFORM);
+  plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
 
 
   return true;
@@ -119,19 +116,30 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   boss.update(player, fElapsedTime);
 
-  arena.update(fElapsedTime);
-
 
   // Render and Draw everything
 
+  SetPixelMode(olc::Pixel::ALPHA);
+
 //  DrawSprite(boss.getPos(), boss.getCurrentSprite());
 
-  DrawSprite({0, 0}, arena.getCurrentSprite());
+  DrawSprite(plateformario2.getPos(), plateformario2.getCurrentSprite());
+  DrawSprite(plateformario3.getPos(), plateformario3.getCurrentSprite());
+  DrawSprite(plateformario4.getPos(), plateformario4.getCurrentSprite());
+  DrawSprite(plateformario5.getPos(), plateformario5.getCurrentSprite());
+
+  DrawSprite(plateform1.getPos(), plateform1.getCurrentSprite());
+  DrawSprite(plateform2.getPos(), plateform2.getCurrentSprite());
+  DrawSprite(plateform3.getPos(), plateform3.getCurrentSprite());
+  DrawSprite(plateform4.getPos(), plateform4.getCurrentSprite());
 
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
 //  for (int i; i < minions.size(); i++)
 //    DrawSprite(minions[i].getPos(), minions[i].getCurrentSprite());
+
+  SetPixelMode(olc::Pixel::NORMAL);
+
 
   return true;
 }

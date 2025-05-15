@@ -24,17 +24,14 @@ namespace  ImpossibleBattleBoss {
       std::vector<cMinion> minions;
       std::map<MinionState, std::vector<olc::Sprite *>> * minionSprites;
 
-      cArena arena;
-      std::vector<olc::Sprite *> arenaSprites;
+      cArena plateformario2, plateformario3, plateformario4, plateformario5;
+      cArena plateform2, plateform3, plateform4, plateform1;
 
       std::vector<std::vector<cEntity>> * map;
 
     private:
       void makePlayerSprites();
       void makePlayerControls();
-      void makeArenaSprites();
-      std::vector<Hitbox> makeArenaHitbox();
-
 
     public:
       World()

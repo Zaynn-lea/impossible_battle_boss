@@ -20,7 +20,8 @@ namespace ImpossibleBattleBoss
 	{
 		WALL,
 		LADDER,
-		PLATFORM,
+		PLATEFORM,
+		PLATEFORMARIO,
 		PLAYER,
 		PLAYERATTAC,
 		BOSS,
