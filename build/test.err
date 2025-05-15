@@ -1,0 +1,11 @@
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp: In function ‘olc::Sprite* getCurrentSprite()’:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:21:43: error: ‘sprites’ was not declared in this scope; did you mean ‘write’?
+   21 | olc::Sprite * getCurrentSprite() { return sprites[cAnimable::animationCount]; }
+      |                                           ^~~~~~~
+      |                                           write
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:21:62: error: ‘animationCount’ is not a member of ‘ImpossibleBattleBoss::cAnimable’
+   21 | olc::Sprite * getCurrentSprite() { return sprites[cAnimable::animationCount]; }
+      |                                                              ^~~~~~~~~~~~~~
+make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:76: CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/ImpossibleBattleBoss.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2

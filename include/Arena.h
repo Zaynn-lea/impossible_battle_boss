@@ -13,8 +13,11 @@ namespace ImpossibleBattleBoss
 	{
 	public:
 		cArena();
-		cArena(std::vector<Hitbox> hitboxes, std::vector<olc::Sprite *> * sprites);
+		cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, EntityType type);
 		~cArena();
+
+	private:
+		std::vector<olc::Sprite *> * sprites;
 
 	public:
 		olc::Sprite * getCurrentSprite();

@@ -82,14 +82,6 @@ void World::makeArenaSprites()
 }
 
 
-std::vector<Hitbox> World::makeArenaHitbox()
-{
-	std::vector<Hitbox> hitboxes;
-
-	return hitboxes;
-}
-
-
 bool World::OnUserCreate()
 {
   boss = cBoss();
@@ -103,7 +95,7 @@ bool World::OnUserCreate()
 
   makeArenaSprites();
 
-  arena = cArena(makeArenaHitbox(), &arenaSprites);
+  arena = cArena({0, 0}, &arenaSprites, PLATFORM);
 
 
   return true;

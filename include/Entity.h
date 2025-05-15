@@ -19,6 +19,8 @@ namespace ImpossibleBattleBoss
 	enum EntityType
 	{
 		WALL,
+		LADDER,
+		PLATFORM,
 		PLAYER,
 		PLAYERATTAC,
 		BOSS,
