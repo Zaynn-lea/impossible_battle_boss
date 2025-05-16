@@ -23,7 +23,7 @@ cBoss::~cBoss() {}
 
 olc::Sprite * cBoss::getCurrentSprite()
 {
-	return (*sprites)[state][0];	// TODO : change 0
+	return (*sprites)[state][cAnimable::animationCounter];
 }
 
 

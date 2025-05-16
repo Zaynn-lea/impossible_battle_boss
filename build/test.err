@@ -1,14 +1,23 @@
-<<<<<<< HEAD
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp: In function ‘olc::Sprite* getCurrentSprite()’:
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:21:43: error: ‘sprites’ was not declared in this scope; did you mean ‘write’?
-   21 | olc::Sprite * getCurrentSprite() { return sprites[cAnimable::animationCount]; }
-      |                                           ^~~~~~~
-      |                                           write
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:21:62: error: ‘animationCount’ is not a member of ‘ImpossibleBattleBoss::cAnimable’
-   21 | olc::Sprite * getCurrentSprite() { return sprites[cAnimable::animationCount]; }
-      |                                                              ^~~~~~~~~~~~~~
-make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:76: CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o] Error 1
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:76:6: error: no declaration matches ‘void ImpossibleBattleBoss::World::makeArenaSprites()’
+   76 | void World::makeArenaSprites()
+      |      ^~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:76:6: note: no functions named ‘void ImpossibleBattleBoss::World::makeArenaSprites()’
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:4:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/engine.h:13:9: note: ‘class ImpossibleBattleBoss::World’ defined here
+   13 |   class World : public olc::PixelGameEngine
+      |         ^~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:85:21: error: no declaration matches ‘std::vector<ImpossibleBattleBoss::_hitbox*> ImpossibleBattleBoss::World::makeArenaHitbox()’
+   85 | std::vector<Hitbox> World::makeArenaHitbox()
+      |                     ^~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:85:21: note: no functions named ‘std::vector<ImpossibleBattleBoss::_hitbox*> ImpossibleBattleBoss::World::makeArenaHitbox()’
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:4:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/engine.h:13:9: note: ‘class ImpossibleBattleBoss::World’ defined here
+   13 |   class World : public olc::PixelGameEngine
+      |         ^~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp: In member function ‘virtual bool ImpossibleBattleBoss::World::OnUserUpdate(float)’:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:144:3: error: ‘arena’ was not declared in this scope
+  144 |   arena.update(fElapsedTime);
+      |   ^~~~~
+make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:146: CMakeFiles/ImpossibleBattleBoss.dir/src/engine.cpp.o] Error 1
 make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/ImpossibleBattleBoss.dir/all] Error 2
 make: *** [Makefile:91: all] Error 2
-=======
->>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f

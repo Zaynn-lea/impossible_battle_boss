@@ -14,11 +14,7 @@ namespace  ImpossibleBattleBoss {
   {
     private:
       cBoss   boss;
-<<<<<<< HEAD
       std::map<BossState, std::vector<olc::Sprite *>> bossSprites;
-=======
-      std::map<BossState, std::vector<olc::Sprite *>> * bossSprites;
->>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 
 
       cPlayer player;
@@ -26,7 +22,6 @@ namespace  ImpossibleBattleBoss {
       std::map<PlayerState, std::vector<olc::Sprite *>> playerSprites;
 
       std::vector<cMinion> minions;
-<<<<<<< HEAD
       std::map<MinionState, std::vector<olc::Sprite *>> minionSprites;
 
       cArena plateformario2, plateformario3, plateformario4, plateformario5;
@@ -35,25 +30,14 @@ namespace  ImpossibleBattleBoss {
 
       std::vector<olc::Sprite *> groundSprites;
       cArena ground;
-=======
-      std::map<MinionState, std::vector<olc::Sprite *>> * minionSprites;
 
-      cArena arena;
-      std::vector<olc::Sprite *> arenaSprites;
->>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 
       std::vector<std::vector<cEntity>> * map;
 
     private:
       void makePlayerSprites();
       void makePlayerControls();
-<<<<<<< HEAD
       void makeGroundSprites();
-=======
-      void makeArenaSprites();
-      std::vector<Hitbox> makeArenaHitbox();
-
->>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 
     public:
       World()

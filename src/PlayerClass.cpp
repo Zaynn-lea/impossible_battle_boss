@@ -19,6 +19,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
 	isRight	      = true;
+	isRight	      = false;
 }
 
 cPlayer::~cPlayer() {}
@@ -41,6 +42,14 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 {
 	olc::vi2d mouvment = {0, 0};
 
+	// Gravity and falling down :
+
+	if (isInAir)
+	{
+		mouvment.y += GRAVITY * deltaTime;
+	}
+
+	// Mouvment from player input
 
 	if (keys[olc::Key::Q].bHeld)
 	{

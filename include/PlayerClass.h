@@ -32,6 +32,7 @@ namespace ImpossibleBattleBoss
       PlayerState state;
       bool	  isKeyPressed;
       bool	  isRight;
+      bool	  isInAir;
 
       std::map<PlayerState, std::vector<olc::Sprite *>> * sprites;
 

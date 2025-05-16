@@ -9,7 +9,6 @@ using namespace ImpossibleBattleBoss;
 
 cArena::cArena() : cEntity() {}
 
-<<<<<<< HEAD
 cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, EntityType type)
 	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, sprite->width, sprite->height), sprite, type)
 {
@@ -47,10 +46,4 @@ void cArena::update(float fElapsedTime)
 			cAnimable::animationTime = 0;
 		}
 	}
-=======
-cArena::cArena(std::vector<Hitbox>, std::vector<olc::Sprite *> * sprites)
-	: cEntity()
-{
-	
->>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 }
