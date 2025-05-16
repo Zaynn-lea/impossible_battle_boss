@@ -19,7 +19,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
 	isRight	      = true;
-	isRight	      = false;
+	isInAir	      = true;
 }
 
 cPlayer::~cPlayer() {}
@@ -38,7 +38,7 @@ void cPlayer::setState(PlayerState newState)
 }
 
 
-void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
+void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::vector<cEntity *>> * map, float deltaTime)
 {
 	olc::vi2d mouvment = {0, 0};
 
@@ -85,6 +85,11 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, float deltaTime)
 	}
 
 	setPos(getPos() + mouvment);
+
+
+	// Collisions :
+
+	// TODO : ask Djalim about the map
 
 
 	// Update the sprite :

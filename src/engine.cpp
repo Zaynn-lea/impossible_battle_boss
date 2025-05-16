@@ -126,7 +126,7 @@ bool World::OnUserUpdate(float fElapsedTime)
   for (auto const& [key, val] : controls)
     controls[key] = GetKey(key);
 
-  player.update(controls, fElapsedTime);
+  player.update(controls, map, fElapsedTime);
 
   for (int i; i < minions.size(); i++)
     minions[i].update(player, map, fElapsedTime);

@@ -32,7 +32,7 @@ namespace  ImpossibleBattleBoss {
       cArena ground;
 
 
-      std::vector<std::vector<cEntity>> * map;
+      std::vector<std::vector<cEntity *>> * map;
 
     private:
       void makePlayerSprites();

@@ -21,7 +21,7 @@ cMinion::~cMinion() {}
 olc::Sprite * cMinion::getCurrentSprite()	{  return (*sprites)[state][0];  }	// TODO : replace 0
 
 
-void cMinion::update(cPlayer p, std::vector<std::vector<cEntity>> * map, float deltaTime)
+void cMinion::update(cPlayer p, std::vector<std::vector<cEntity *>> * map, float deltaTime)
 {
 	// TODO
 }
