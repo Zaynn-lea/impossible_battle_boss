@@ -1,6 +1,9 @@
 
+<<<<<<< HEAD
 #include <iostream>
 
+=======
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 #include "Arena.h"
 #include "config.h"
 #include "engine.h"
@@ -75,12 +78,29 @@ void World::makePlayerControls()
 }
 
 
+<<<<<<< HEAD
 void World::makeGroundSprites()
 {
 	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-0.png"));
 	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-1.png"));
 	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-2.png"));
 	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-3.png"));
+=======
+void World::makeArenaSprites()
+{
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-0.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-1.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-2.png"));
+	arenaSprites.push_back(new olc::Sprite("../assests/arena/bosiasol-3.png"));
+}
+
+
+std::vector<Hitbox> World::makeArenaHitbox()
+{
+	std::vector<Hitbox> hitboxes;
+
+	return hitboxes;
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 }
 
 
@@ -95,6 +115,7 @@ bool World::OnUserCreate()
   player = cPlayer({10, 10}, &playerSprites);
 
 
+<<<<<<< HEAD
   plateformario2 = cArena({0, 0}, new olc::Sprite("../assests/plateformario2.png"), PLATEFORMARIO);
   plateformario3 = cArena({0, 0}, new olc::Sprite("../assests/plateformario3.png"), PLATEFORMARIO);
   plateformario4 = cArena({0, 0}, new olc::Sprite("../assests/plateformario4.png"), PLATEFORMARIO);
@@ -110,6 +131,11 @@ bool World::OnUserCreate()
 
   makeGroundSprites();
   ground = cArena({0, 0}, &groundSprites, PLATEFORM);
+=======
+  makeArenaSprites();
+
+  arena = cArena(makeArenaHitbox(), &arenaSprites);
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 
 
   return true;
@@ -123,8 +149,11 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   // Update everything
 
+<<<<<<< HEAD
 //  ground.update(fElapsedTime);	// TODO : problem with the sprites
 
+=======
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
   for (auto const& [key, val] : controls)
     controls[key] = GetKey(key);
 
@@ -135,7 +164,16 @@ bool World::OnUserUpdate(float fElapsedTime)
 
   boss.update(player, fElapsedTime);
 
+  arena.update(fElapsedTime);
 
+
+  // Render and Draw everything
+
+//  DrawSprite(boss.getPos(), boss.getCurrentSprite());
+
+  DrawSprite({0, 0}, arena.getCurrentSprite());
+
+<<<<<<< HEAD
   // Render and Draw everything
 
   SetPixelMode(olc::Pixel::ALPHA);
@@ -158,13 +196,18 @@ bool World::OnUserUpdate(float fElapsedTime)
   DrawSprite(ladderRight.getPos(), ladderRight.getCurrentSprite());*/
 
 
+=======
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
 //  for (int i; i < minions.size(); i++)
 //    DrawSprite(minions[i].getPos(), minions[i].getCurrentSprite());
+<<<<<<< HEAD
 
   SetPixelMode(olc::Pixel::NORMAL);
 
+=======
+>>>>>>> 0cbec9fad37ecee9bbb7f2964443aefdf9b07c9f
 
   return true;
 }
