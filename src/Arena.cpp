@@ -12,13 +12,38 @@ cArena::cArena() : cEntity() {}
 cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, EntityType type)
 	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, sprite->width, sprite->height), sprite, type)
 {
-	setSprite(sprite);
+	this->sprites = NULL;
+}
+
+cArena::cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, EntityType type)
+	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, (*sprites)[0]->width, (*sprites)[0]->height), (*sprites)[0], type)
+{
+	this->sprites = sprites;
 }
 
 cArena::~cArena() {}
 
 
-olc::Sprite * cArena::getCurrentSprite() { return getSprite(); }
+olc::Sprite * cArena::getCurrentSprite()
+{
+	if (sprites == NULL)
+		return getSprite();
+	return (*sprites)[cAnimable::animationCounter];
+}
 
 
-void cArena::update(float fElapsedTime) {}
+void cArena::update(float fElapsedTime)
+{
+	if (sprites != NULL)
+	{
+		cAnimable::animationTime += fElapsedTime;
+
+		if (cAnimable::animationTime >= 0.1)
+		{
+			cAnimable::animationCounter++;
+			cAnimable::animationCounter = cAnimable::animationCounter % (*sprites).size();
+
+			cAnimable::animationTime = 0;
+		}
+	}
+}

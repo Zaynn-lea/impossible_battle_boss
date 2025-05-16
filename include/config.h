@@ -9,4 +9,5 @@
 
 
 // Player mouvement
-#define PLAYER_SPEED 420	// nice
+#define PLAYER_SPEED	420	// nice
+#define GRAVITY		420

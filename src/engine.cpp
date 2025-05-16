@@ -1,4 +1,6 @@
 
+#include <iostream>
+
 #include "Arena.h"
 #include "config.h"
 #include "engine.h"
@@ -73,6 +75,15 @@ void World::makePlayerControls()
 }
 
 
+void World::makeGroundSprites()
+{
+	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-0.png"));
+	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-1.png"));
+	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-2.png"));
+	groundSprites.push_back(new olc::Sprite("../assests/ground/solseul-3.png"));
+}
+
+
 bool World::OnUserCreate()
 {
   boss = cBoss();
@@ -94,6 +105,12 @@ bool World::OnUserCreate()
   plateform3 = cArena({0, 0}, new olc::Sprite("../assests/3.png"), PLATEFORM);
   plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
 
+  ladderLeft  = cArena({0, 0}, new olc::Sprite("../assests/echelle1.png"), LADDER);
+  ladderRight = cArena({0, 0}, new olc::Sprite("../assests/echelle2.png"), LADDER);
+
+  makeGroundSprites();
+  ground = cArena({0, 0}, &groundSprites, PLATEFORM);
+
 
   return true;
 }
@@ -105,6 +122,8 @@ bool World::OnUserUpdate(float fElapsedTime)
 
 
   // Update everything
+
+//  ground.update(fElapsedTime);	// TODO : problem with the sprites
 
   for (auto const& [key, val] : controls)
     controls[key] = GetKey(key);
@@ -123,7 +142,9 @@ bool World::OnUserUpdate(float fElapsedTime)
 
 //  DrawSprite(boss.getPos(), boss.getCurrentSprite());
 
-  DrawSprite(plateformario2.getPos(), plateformario2.getCurrentSprite());
+  DrawSprite(ground.getPos(), ground.getCurrentSprite());
+
+/*  DrawSprite(plateformario2.getPos(), plateformario2.getCurrentSprite());
   DrawSprite(plateformario3.getPos(), plateformario3.getCurrentSprite());
   DrawSprite(plateformario4.getPos(), plateformario4.getCurrentSprite());
   DrawSprite(plateformario5.getPos(), plateformario5.getCurrentSprite());
@@ -132,6 +153,10 @@ bool World::OnUserUpdate(float fElapsedTime)
   DrawSprite(plateform2.getPos(), plateform2.getCurrentSprite());
   DrawSprite(plateform3.getPos(), plateform3.getCurrentSprite());
   DrawSprite(plateform4.getPos(), plateform4.getCurrentSprite());
+
+  DrawSprite(ladderLeft.getPos(), ladderLeft.getCurrentSprite());
+  DrawSprite(ladderRight.getPos(), ladderRight.getCurrentSprite());*/
+
 
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
