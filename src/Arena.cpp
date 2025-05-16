@@ -9,16 +9,18 @@ using namespace ImpossibleBattleBoss;
 
 cArena::cArena() : cEntity() {}
 
-cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, EntityType type)
-	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, sprite->width, sprite->height), sprite, type)
+cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, ArenaType type)
+	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, sprite->width, sprite->height), sprite, WALL)
 {
 	this->sprites = NULL;
+	this->subType = type;
 }
 
-cArena::cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, EntityType type)
-	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, (*sprites)[0]->width, (*sprites)[0]->height), (*sprites)[0], type)
+cArena::cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, ArenaType type)
+	: cEntity(spawnCoords, createHitbox(spawnCoords.x, spawnCoords.y, (*sprites)[0]->width, (*sprites)[0]->height), (*sprites)[0], WALL)
 {
 	this->sprites = sprites;
+	this->subType = type;
 }
 
 cArena::~cArena() {}
@@ -30,6 +32,9 @@ olc::Sprite * cArena::getCurrentSprite()
 		return getSprite();
 	return (*sprites)[cAnimable::animationCounter];
 }
+
+
+ArenaType cArena::getSubType() { return subType; }
 
 
 void cArena::update(float fElapsedTime)

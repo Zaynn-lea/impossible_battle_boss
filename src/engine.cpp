@@ -65,11 +65,11 @@ void World::makePlayerSprites()
 
 void World::makePlayerControls()
 {
-	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Z,	GetKey(olc::Key::Z)) );
-	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Q,	GetKey(olc::Key::Q)) );
-	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::S,	GetKey(olc::Key::S)) );
-	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::D,	GetKey(olc::Key::D)) );
-	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::SPACE, GetKey(olc::Key::SPACE)) );
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Z,	GetKey(olc::Key::Z)));
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::Q,	GetKey(olc::Key::Q)));
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::S,	GetKey(olc::Key::S)));
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::D,	GetKey(olc::Key::D)));
+	controls.insert ( std::pair<olc::Key, olc::HWButton>(olc::Key::SPACE,	GetKey(olc::Key::SPACE)) );
 }
 
 
@@ -82,6 +82,37 @@ void World::makeGroundSprites()
 }
 
 
+void World::makeArena()
+{
+//	plateformario2 = cArena({0, 0}, new olc::Sprite("../assests/plateformario2.png"), PLATEFORMARIO);
+//	plateformario3 = cArena({0, 0}, new olc::Sprite("../assests/plateformario3.png"), PLATEFORMARIO);
+//	plateformario4 = cArena({0, 0}, new olc::Sprite("../assests/plateformario4.png"), PLATEFORMARIO);
+//	plateformario5 = cArena({0, 0}, new olc::Sprite("../assests/plateformario5.png"), PLATEFORMARIO);
+
+	plateform1 = cArena({0, 0}, new olc::Sprite("../assests/1.png"), PLATEFORM);
+	plateform2 = cArena({0, 0}, new olc::Sprite("../assests/2.png"), PLATEFORM);
+	plateform3 = cArena({0, 0}, new olc::Sprite("../assests/3.png"), PLATEFORM);
+	plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
+
+	ladderLeft  = cArena({0, 0}, new olc::Sprite("../assests/echelle1.png"), LADDER);
+	ladderRight = cArena({0, 0}, new olc::Sprite("../assests/echelle2.png"), LADDER);
+
+	makeGroundSprites();
+	ground = cArena({0, 0}, &groundSprites, PLATEFORM);
+	ground.setHitbox(createHitbox(ground.getHitbox()->topLeft.x, Y_MAX - 60, ground.getHitbox()->botRight.x, ground.getHitbox()->botRight.y));
+}
+
+
+void World::makeEntityMap()
+{
+  Line tempLine;
+
+  tempLine.push_back(&ground);
+
+  map.push_back(tempLine);
+}
+
+
 bool World::OnUserCreate()
 {
   boss = cBoss();
@@ -90,25 +121,11 @@ bool World::OnUserCreate()
   makePlayerSprites();
   makePlayerControls();
 
-  player = cPlayer({10, 10}, &playerSprites);
+  player = cPlayer({X_MAX / 2, 10}, &playerSprites);
 
+  makeArena();
 
-  plateformario2 = cArena({0, 0}, new olc::Sprite("../assests/plateformario2.png"), PLATEFORMARIO);
-  plateformario3 = cArena({0, 0}, new olc::Sprite("../assests/plateformario3.png"), PLATEFORMARIO);
-  plateformario4 = cArena({0, 0}, new olc::Sprite("../assests/plateformario4.png"), PLATEFORMARIO);
-  plateformario5 = cArena({0, 0}, new olc::Sprite("../assests/plateformario5.png"), PLATEFORMARIO);
-
-  plateform1 = cArena({0, 0}, new olc::Sprite("../assests/1.png"), PLATEFORM);
-  plateform2 = cArena({0, 0}, new olc::Sprite("../assests/2.png"), PLATEFORM);
-  plateform3 = cArena({0, 0}, new olc::Sprite("../assests/3.png"), PLATEFORM);
-  plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
-
-  ladderLeft  = cArena({0, 0}, new olc::Sprite("../assests/echelle1.png"), LADDER);
-  ladderRight = cArena({0, 0}, new olc::Sprite("../assests/echelle2.png"), LADDER);
-
-  makeGroundSprites();
-  ground = cArena({0, 0}, &groundSprites, PLATEFORM);
-
+  makeEntityMap();
 
   return true;
 }

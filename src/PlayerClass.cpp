@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include "Entity.h"
+#include "Arena.h"
 #include "PlayerClass.h"
 #include "olcPixelGameEngine.h"
 
@@ -38,7 +39,7 @@ void cPlayer::setState(PlayerState newState)
 }
 
 
-void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::vector<cEntity *>> * map, float deltaTime)
+void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::vector<cEntity *>> map, float deltaTime)
 {
 	olc::vi2d mouvment = {0, 0};
 
@@ -89,7 +90,25 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::ve
 
 	// Collisions :
 
-	// TODO : ask Djalim about the map
+	for (auto & line : map)
+	{
+		for (auto & entity : line)
+		{
+			if (isColliding(entity) && (entity->getType() == WALL))
+			{
+				// TODO : switching between the different types to know what to do with the coords
+
+				switch (entity->getType())
+				{
+				case PLATEFORM:
+					int yDeltaHB = entity->getHitbox()->botRight.y - entity->getHitbox()->topLeft.y;
+					setPos({getPos().x, entity->getAbsHB()->topLeft.y - yDeltaHB});
+					isInAir = false;
+					break;
+				}
+			}
+		}
+	}
 
 
 	// Update the sprite :

@@ -10,6 +10,10 @@
 
 
 namespace  ImpossibleBattleBoss {
+
+  typedef std::vector<cEntity*> Line;
+  typedef std::vector<Line>	Grid;
+
   class World : public olc::PixelGameEngine
   {
     private:
@@ -31,13 +35,14 @@ namespace  ImpossibleBattleBoss {
       std::vector<olc::Sprite *> groundSprites;
       cArena ground;
 
-
-      std::vector<std::vector<cEntity *>> * map;
+      Grid map;
 
     private:
       void makePlayerSprites();
       void makePlayerControls();
       void makeGroundSprites();
+      void makeArena();
+      void makeEntityMap();
 
     public:
       World()

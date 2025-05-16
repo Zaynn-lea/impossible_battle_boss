@@ -54,6 +54,7 @@ using namespace ImpossibleBattleBoss;
 	int cEntity::getHP() { return HP; }
 	olc::vi2d cEntity::getPos() { return pos; }
 	olc::Sprite *cEntity::getSprite() { return sprite; }
+	EntityType cEntity::getType() { return type; }
 
 	void cEntity::setHitbox(Hitbox newHitbox) { hitbox = newHitbox; }
 	void cEntity::setHP(int newHP) { HP = newHP; }

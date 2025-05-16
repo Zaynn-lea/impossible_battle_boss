@@ -1,23 +1,43 @@
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:76:6: error: no declaration matches ‘void ImpossibleBattleBoss::World::makeArenaSprites()’
-   76 | void World::makeArenaSprites()
-      |      ^~~~~
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:76:6: note: no functions named ‘void ImpossibleBattleBoss::World::makeArenaSprites()’
-In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:4:
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/engine.h:13:9: note: ‘class ImpossibleBattleBoss::World’ defined here
-   13 |   class World : public olc::PixelGameEngine
-      |         ^~~~~
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:85:21: error: no declaration matches ‘std::vector<ImpossibleBattleBoss::_hitbox*> ImpossibleBattleBoss::World::makeArenaHitbox()’
-   85 | std::vector<Hitbox> World::makeArenaHitbox()
-      |                     ^~~~~
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:85:21: note: no functions named ‘std::vector<ImpossibleBattleBoss::_hitbox*> ImpossibleBattleBoss::World::makeArenaHitbox()’
-In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:4:
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/engine.h:13:9: note: ‘class ImpossibleBattleBoss::World’ defined here
-   13 |   class World : public olc::PixelGameEngine
-      |         ^~~~~
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp: In member function ‘virtual bool ImpossibleBattleBoss::World::OnUserUpdate(float)’:
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/engine.cpp:144:3: error: ‘arena’ was not declared in this scope
-  144 |   arena.update(fElapsedTime);
-      |   ^~~~~
-make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:146: CMakeFiles/ImpossibleBattleBoss.dir/src/engine.cpp.o] Error 1
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:12:1: error: no declaration matches ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::EntityType)’
+   12 | cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, EntityType type)
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: candidates are: ‘ImpossibleBattleBoss::cArena::cArena(const ImpossibleBattleBoss::cArena&)’
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:23:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::ArenaType)’
+   23 |                 cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> *  sprites, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:22:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::ArenaType)’
+   22 |                 cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:10:1: note:                 ‘ImpossibleBattleBoss::cArena::cArena()’
+   10 | cArena::cArena() : cEntity() {}
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: ‘class ImpossibleBattleBoss::cArena’ defined here
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:19:1: error: no declaration matches ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::EntityType)’
+   19 | cArena::cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, EntityType type)
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: candidates are: ‘ImpossibleBattleBoss::cArena::cArena(const ImpossibleBattleBoss::cArena&)’
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:23:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::ArenaType)’
+   23 |                 cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> *  sprites, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:22:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::ArenaType)’
+   22 |                 cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:10:1: note:                 ‘ImpossibleBattleBoss::cArena::cArena()’
+   10 | cArena::cArena() : cEntity() {}
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: ‘class ImpossibleBattleBoss::cArena’ defined here
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:76: CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o] Error 1
 make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/ImpossibleBattleBoss.dir/all] Error 2
 make: *** [Makefile:91: all] Error 2

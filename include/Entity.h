@@ -19,9 +19,6 @@ namespace ImpossibleBattleBoss
 	enum EntityType
 	{
 		WALL,
-		LADDER,
-		PLATEFORM,
-		PLATEFORMARIO,
 		PLAYER,
 		PLAYERATTAC,
 		BOSS,
@@ -49,6 +46,7 @@ namespace ImpossibleBattleBoss
 		int		getHP();
 		olc::vi2d 	getPos();
 		olc::Sprite *	getSprite();
+		EntityType	getType();
 
 		void setHitbox(Hitbox newHitbox);
 		void setHP(int newHP);
