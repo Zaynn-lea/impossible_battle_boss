@@ -98,13 +98,22 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::ve
 			{
 				// TODO : switching between the different types to know what to do with the coords
 
-				switch (entity->getType())
+				switch (((cArena *)entity)->getSubType())
 				{
 				case PLATEFORM:
+				{
 					int yDeltaHB = entity->getHitbox()->botRight.y - entity->getHitbox()->topLeft.y;
 					setPos({getPos().x, entity->getAbsHB()->topLeft.y - yDeltaHB});
 					isInAir = false;
 					break;
+				}
+
+				case LADDER:
+				{
+					int xDeltaHB = entity->getHitbox()->botRight.x - entity->getHitbox()->topLeft.x;
+					setPos({entity->getAbsHB()->topLeft.x - xDeltaHB, getPos().x});
+					break;
+				}
 				}
 			}
 		}

@@ -95,17 +95,26 @@ void World::makeArena()
 	plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
 
 	ladderLeft  = cArena({0, 0}, new olc::Sprite("../assests/echelle1.png"), LADDER);
+	ladderLeft.setHitbox(createHitbox(ladderLeft.getHitbox()->topLeft.x, ladderLeft.getHitbox()->topLeft.y, ladderLeft.getHitbox()->topLeft.x + 60, ladderLeft.getHitbox()->botRight.y));
 	ladderRight = cArena({0, 0}, new olc::Sprite("../assests/echelle2.png"), LADDER);
+	ladderRight.setHitbox(createHitbox(X_MAX - 60, ladderRight.getHitbox()->topLeft.y, ladderRight.getHitbox()->botRight.x, ladderRight.getHitbox()->botRight.y));
 
 	makeGroundSprites();
 	ground = cArena({0, 0}, &groundSprites, PLATEFORM);
-	ground.setHitbox(createHitbox(ground.getHitbox()->topLeft.x, Y_MAX - 60, ground.getHitbox()->botRight.x, ground.getHitbox()->botRight.y));
+	ground.setHitbox(createHitbox(-100, Y_MAX - 60, X_MAX + 100, ground.getHitbox()->botRight.y));
 }
 
 
 void World::makeEntityMap()
 {
   Line tempLine;
+
+//  tempLine.push_back(&ladderLeft);
+//  tempLine.push_back(&ladderRight);
+
+  map.push_back(tempLine);
+
+  tempLine.clear();
 
   tempLine.push_back(&ground);
 
@@ -121,7 +130,7 @@ bool World::OnUserCreate()
   makePlayerSprites();
   makePlayerControls();
 
-  player = cPlayer({X_MAX / 2, 10}, &playerSprites);
+  player = cPlayer({128, 10}, &playerSprites);
 
   makeArena();
 
@@ -168,9 +177,9 @@ bool World::OnUserUpdate(float fElapsedTime)
   DrawSprite(plateform2.getPos(), plateform2.getCurrentSprite());
   DrawSprite(plateform3.getPos(), plateform3.getCurrentSprite());
   DrawSprite(plateform4.getPos(), plateform4.getCurrentSprite());
-
+*/
   DrawSprite(ladderLeft.getPos(), ladderLeft.getCurrentSprite());
-  DrawSprite(ladderRight.getPos(), ladderRight.getCurrentSprite());*/
+  DrawSprite(ladderRight.getPos(), ladderRight.getCurrentSprite());
 
 
   DrawSprite(player.getPos(), player.getCurrentSprite());
