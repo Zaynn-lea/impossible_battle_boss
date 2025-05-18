@@ -1,16 +1,43 @@
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.o: in function `ImpossibleBattleBoss::cBoss::cBoss(std::map<ImpossibleBattleBoss::BossState, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> >, std::less<ImpossibleBattleBoss::BossState>, std::allocator<std::pair<ImpossibleBattleBoss::BossState const, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> > > > >*)':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Boss.cpp:14: undefined reference to `ImpossibleBattleBoss::createHitbox(int, int, int, int)'
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/Boss.cpp.o: in function `ImpossibleBattleBoss::cBoss::~cBoss()':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Boss.cpp:21: undefined reference to `ImpossibleBattleBoss::cEntity::~cEntity()'
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/Minion.cpp.o: in function `ImpossibleBattleBoss::cMinion::cMinion(olc::v2d_generic<int>, std::map<ImpossibleBattleBoss::MinionState, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> >, std::less<ImpossibleBattleBoss::MinionState>, std::allocator<std::pair<ImpossibleBattleBoss::MinionState const, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> > > > >*)':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Minion.cpp:12: undefined reference to `ImpossibleBattleBoss::createHitbox(int, int, int, int)'
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/Minion.cpp.o: in function `ImpossibleBattleBoss::cMinion::~cMinion()':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Minion.cpp:18: undefined reference to `ImpossibleBattleBoss::cEntity::~cEntity()'
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/PlayerClass.cpp.o: in function `ImpossibleBattleBoss::cPlayer::cPlayer(olc::v2d_generic<int>, std::map<ImpossibleBattleBoss::PlayerState, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> >, std::less<ImpossibleBattleBoss::PlayerState>, std::allocator<std::pair<ImpossibleBattleBoss::PlayerState const, std::vector<olc::Sprite*, std::allocator<olc::Sprite*> > > > >*)':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/PlayerClass.cpp:14: undefined reference to `ImpossibleBattleBoss::createHitbox(int, int, int, int)'
-/usr/bin/ld: CMakeFiles/ImpossibleBattleBoss.dir/src/PlayerClass.cpp.o: in function `ImpossibleBattleBoss::cPlayer::~cPlayer()':
-/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/PlayerClass.cpp:20: undefined reference to `ImpossibleBattleBoss::cEntity::~cEntity()'
-collect2: error: ld returned 1 exit status
-make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:177: ImpossibleBattleBoss] Error 1
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:12:1: error: no declaration matches ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::EntityType)’
+   12 | cArena::cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, EntityType type)
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: candidates are: ‘ImpossibleBattleBoss::cArena::cArena(const ImpossibleBattleBoss::cArena&)’
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:23:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::ArenaType)’
+   23 |                 cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> *  sprites, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:22:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::ArenaType)’
+   22 |                 cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:10:1: note:                 ‘ImpossibleBattleBoss::cArena::cArena()’
+   10 | cArena::cArena() : cEntity() {}
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: ‘class ImpossibleBattleBoss::cArena’ defined here
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:19:1: error: no declaration matches ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::EntityType)’
+   19 | cArena::cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> * sprites, EntityType type)
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: candidates are: ‘ImpossibleBattleBoss::cArena::cArena(const ImpossibleBattleBoss::cArena&)’
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:23:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, std::vector<olc::Sprite*>*, ImpossibleBattleBoss::ArenaType)’
+   23 |                 cArena(olc::vi2d spawnCoords, std::vector<olc::Sprite *> *  sprites, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:22:17: note:                 ‘ImpossibleBattleBoss::cArena::cArena(olc::vi2d, olc::Sprite*, ImpossibleBattleBoss::ArenaType)’
+   22 |                 cArena(olc::vi2d spawnCoords, olc::Sprite * sprite, ArenaType type);
+      |                 ^~~~~~
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:10:1: note:                 ‘ImpossibleBattleBoss::cArena::cArena()’
+   10 | cArena::cArena() : cEntity() {}
+      | ^~~~~~
+In file included from /home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/src/Arena.cpp:2:
+/home/zaynn/Documents/Polytech/ProjetIA/impossible_boss_battle/impossible_battle_boss/include/Arena.h:18:15: note: ‘class ImpossibleBattleBoss::cArena’ defined here
+   18 |         class cArena : public cEntity, cAnimable
+      |               ^~~~~~
+make[2]: *** [CMakeFiles/ImpossibleBattleBoss.dir/build.make:76: CMakeFiles/ImpossibleBattleBoss.dir/src/Arena.cpp.o] Error 1
 make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/ImpossibleBattleBoss.dir/all] Error 2
 make: *** [Makefile:91: all] Error 2

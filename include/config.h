@@ -14,3 +14,8 @@
 
 const int XSIZE = X_MAX / COLS;
 const int YSIZE = Y_MAX / ROWS;
+
+// Player mouvement
+#define PLAYER_SPEED	420	// nice
+#define GRAVITY		420
+
