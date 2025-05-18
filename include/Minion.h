@@ -20,7 +20,6 @@ namespace ImpossibleBattleBoss
 	public:
 		cMinion();
 		cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Sprite *>> * sprites);
-		~cMinion();
 
 	private:
 		MinionState state;

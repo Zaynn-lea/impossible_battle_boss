@@ -19,14 +19,14 @@ void World::genMap(int density){
     Line line;
     map.push_back(line);
     for (int j = 0; j<COLS; ++j){
-      // if ((i == 0) || (i == ROWS-1) ||
-      //     (j == 0) || (j == COLS-1))
-      // {
-      //   cEntity* e = new cEntity(olc::vi2d(i*XSIZE,j*YSIZE),wallhitbox,NULL,WALL);
-      //   map[i].push_back(e);
-      // } else
+      if ((i == 0) || (i == ROWS-1) ||
+          (j == 0) || (j == COLS-1))
+      {
+        cEntity* e = new cEntity(olc::vf2d(i*XSIZE,j*YSIZE),wallhitbox,NULL,WALL);
+        map[i].push_back(e);
+      } else
       if (rand()%100 < density) {
-        cEntity* e = new cEntity(olc::vi2d(i*XSIZE,j*YSIZE),wallhitbox,NULL,OBSCTACLE);
+        cEntity* e = new cEntity(olc::vf2d(i*XSIZE,j*YSIZE),NULL,NULL,OBSCTACLE);
         map[i].push_back(e);
       }
       else {
@@ -41,7 +41,6 @@ bool World::OnUserCreate()
 {
   srand(time(NULL));
   boss	 = cBoss();
-  player = cPlayer(olc::vi2d(2*XSIZE,2*YSIZE));
   genMap(10);
   return true;
 }
