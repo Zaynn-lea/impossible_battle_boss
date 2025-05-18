@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include <algorithm>
 
 #include "config.h"
@@ -19,6 +19,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 	this->sprites = sprites;
 	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
+	isAttacking   = false;
 	isRight	      = true;
 	isInAir	      = true;
 }
@@ -52,6 +53,20 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 
 	// Mouvment from player input
 
+
+	if (mouse.bPressed)
+	{
+		if (isRight)
+			setState(ATTACKING_RIGHT_PLAYER);
+		else
+			setState(ATTACKING_LEFT_PLAYER);
+		isAttacking = true;
+	}
+	else if (cAnimable::animationCounter == (*sprites)[ATTACKING_LEFT_PLAYER].size() - 1)
+	{
+		isAttacking = false;
+	}
+
 	if (keys[olc::Key::Q].bHeld)
 	{
 		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB()->topLeft.x));
@@ -76,22 +91,15 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 			isKeyPressed = true;
 		}
 	}
-	else if (isKeyPressed)
+	else if (isKeyPressed || !isAttacking)
 	{
 		if (isRight)
 			setState(IDLE_RIGHT_PLAYER);
 		else
 			setState(IDLE_LEFT_PLAYER);
-		isKeyPressed = false;
-	}
 
-	if (mouse.bPressed)
-	{
-		if (isRight)
-			setState(ATTACKING_RIGHT_PLAYER);
-		else
-			setState(ATTACKING_LEFT_PLAYER);
 		isKeyPressed = false;
+		isAttacking  = true;
 	}
 
 	setPos(getPos() + mouvment);
@@ -120,11 +128,12 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 				case LADDER:
 				{
 					if (isRight)
-						std::cout << "right" << std::endl;
+					{
+						int i = 0;
+					}
 					else
 					{
-						std::cout << "left" << std::endl;
-						
+						int i = 0;
 					}
 					break;
 				}

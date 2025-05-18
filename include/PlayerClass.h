@@ -31,6 +31,7 @@ namespace ImpossibleBattleBoss
     private:
       PlayerState state;
       bool	  isKeyPressed;
+      bool	  isAttacking;
       bool	  isRight;
       bool	  isInAir;
 
