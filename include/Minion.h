@@ -1,7 +1,5 @@
 
 #pragma once
-
-
 #include "Animable.h"
 #include "Entity.h"
 #include "PlayerClass.h"
@@ -26,11 +24,11 @@ namespace ImpossibleBattleBoss
 
 	private:
 		MinionState state;
+		olc::vi2d destination = {-1,-1};
 		std::map<MinionState, std::vector<olc::Sprite *>> * sprites;
 
 	public:
 		olc::Sprite * getCurrentSprite();
-
-		void update(cPlayer p, std::vector<std::vector<cEntity>> * map, float deltaTime);
+		void update(cPlayer p, Grid map, float deltaTime);
 	};
 };

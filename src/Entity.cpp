@@ -38,13 +38,14 @@ namespace ImpossibleBattleBoss
 
 	Hitbox cEntity::getHitbox() { return hitbox; }
 	int cEntity::getHP() { return HP; }
-	olc::vi2d cEntity::getPos() { return pos; }
+	olc::vf2d cEntity::getPos() { return pos; }
 	olc::Sprite *cEntity::getSprite() { return sprite; }
 
 	void cEntity::setHitbox(Hitbox newHitbox) { hitbox = newHitbox; }
 	void cEntity::setHP(int newHP) { HP = newHP; }
-	void cEntity::setPos(olc::vi2d newPos) { pos = newPos; }
+	void cEntity::setPos(olc::vf2d newPos) { pos = newPos; }
 	void cEntity::setSprite(olc::Sprite *newSprite) { sprite = newSprite; }
+  EntityType cEntity::getType() { return type; }
 
 	bool cEntity::isColliding(cEntity *other)
 	{

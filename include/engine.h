@@ -16,13 +16,14 @@ namespace  ImpossibleBattleBoss {
 
       std::vector<cMinion> minions;
 
-      std::vector<std::vector<cEntity>> * map;
+      Grid map;
 
     public:
       World()
       {
         sAppName = "Impossible Boss Battle";
       }
+      void genMap(int density);
 
       bool OnUserCreate() override;
       bool OnUserUpdate(float fElapsedTime) override;
