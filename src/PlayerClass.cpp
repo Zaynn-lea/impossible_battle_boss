@@ -19,7 +19,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 	this->sprites = sprites;
 	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
-	isAttacking   = false;
+	isAttacking   = true;
 	isRight	      = true;
 	isInAir	      = true;
 }
@@ -51,8 +51,33 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 		mouvment.y += GRAVITY * deltaTime;
 	}
 
-	// Mouvment from player input
 
+	mouvment += controlToMouvment(keys, mouse, deltaTime);
+
+	setPos(getPos() + mouvment);
+
+	applyCollisions(map);
+
+
+	// Update the sprite :
+
+	cAnimable::animationTime += deltaTime;
+
+	if (cAnimable::animationTime >= 0.1)
+	{
+		cAnimable::animationCounter++;
+		cAnimable::animationCounter = cAnimable::animationCounter % (*sprites)[state].size();
+
+		cAnimable::animationTime = 0;
+	}
+}
+
+
+// Supporting functions for update()
+
+olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime)
+{
+	olc::vi2d mouvment = {0, 0};
 
 	if (mouse.bPressed)
 	{
@@ -102,11 +127,13 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 		isAttacking  = true;
 	}
 
-	setPos(getPos() + mouvment);
+	return mouvment;
+}
 
 
-	// Collisions :
 
+void cPlayer::applyCollisions(std::vector<std::vector<cEntity *>> map)
+{
 	for (auto & line : map)
 	{
 		for (auto & entity : line)
@@ -141,18 +168,4 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 			}
 		}
 	}
-
-
-	// Update the sprite :
-
-	cAnimable::animationTime += deltaTime;
-
-	if (cAnimable::animationTime >= 0.1)
-	{
-		cAnimable::animationCounter++;
-		cAnimable::animationCounter = cAnimable::animationCounter % (*sprites)[state].size();
-
-		cAnimable::animationTime = 0;
-	}
 }
-

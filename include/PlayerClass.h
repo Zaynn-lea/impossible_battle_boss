@@ -46,6 +46,8 @@ namespace ImpossibleBattleBoss
       void setState(PlayerState state);
 
     public:
-      void update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime);
+      void	update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime);
+      olc::vi2d	controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime);
+      void	applyCollisions(std::vector<std::vector<cEntity *>> map);
   };
 };
