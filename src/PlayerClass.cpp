@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <algorithm>
 
 #include "config.h"
@@ -39,7 +39,7 @@ void cPlayer::setState(PlayerState newState)
 }
 
 
-void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::vector<cEntity *>> map, float deltaTime)
+void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime)
 {
 	olc::vi2d mouvment = {0, 0};
 
@@ -85,6 +85,15 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::ve
 		isKeyPressed = false;
 	}
 
+	if (mouse.bPressed)
+	{
+		if (isRight)
+			setState(ATTACKING_RIGHT_PLAYER);
+		else
+			setState(ATTACKING_LEFT_PLAYER);
+		isKeyPressed = false;
+	}
+
 	setPos(getPos() + mouvment);
 
 
@@ -110,8 +119,13 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, std::vector<std::ve
 
 				case LADDER:
 				{
-					int xDeltaHB = entity->getHitbox()->botRight.x - entity->getHitbox()->topLeft.x;
-					setPos({entity->getAbsHB()->topLeft.x - xDeltaHB, getPos().x});
+					if (isRight)
+						std::cout << "right" << std::endl;
+					else
+					{
+						std::cout << "left" << std::endl;
+						
+					}
 					break;
 				}
 				}

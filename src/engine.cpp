@@ -34,7 +34,6 @@ void World::makePlayerSprites()
 
 	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(IDLE_LEFT_PLAYER, tempSprites) );
 
-
 	tempSprites.clear();
 
 	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_left-0.png"));
@@ -60,6 +59,34 @@ void World::makePlayerSprites()
 	tempSprites.push_back(new olc::Sprite("../assests/walk_player/marche_right-7.png"));
 
 	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_RIGHT_PLAYER, tempSprites) );
+
+	tempSprites.clear();
+
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-5.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-6.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-7.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_right-8.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(ATTACKING_RIGHT_PLAYER, tempSprites) );
+
+	tempSprites.clear();
+
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-0.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-1.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-2.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-3.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-4.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-5.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-6.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-7.png"));
+	tempSprites.push_back(new olc::Sprite("../assests/attack/proj_IA_attaque_left-8.png"));
+
+	playerSprites.insert ( std::pair<PlayerState, std::vector<olc::Sprite *>>(ATTACKING_LEFT_PLAYER, tempSprites) );
 }
 
 
@@ -95,9 +122,9 @@ void World::makeArena()
 	plateform4 = cArena({0, 0}, new olc::Sprite("../assests/4.png"), PLATEFORM);
 
 	ladderLeft  = cArena({0, 0}, new olc::Sprite("../assests/echelle1.png"), LADDER);
-	ladderLeft.setHitbox(createHitbox(ladderLeft.getHitbox()->topLeft.x, ladderLeft.getHitbox()->topLeft.y, ladderLeft.getHitbox()->topLeft.x + 60, ladderLeft.getHitbox()->botRight.y));
+	ladderLeft.setHitbox(createHitbox(-100, -100, 60, Y_MAX + 100));
 	ladderRight = cArena({0, 0}, new olc::Sprite("../assests/echelle2.png"), LADDER);
-	ladderRight.setHitbox(createHitbox(X_MAX - 60, ladderRight.getHitbox()->topLeft.y, ladderRight.getHitbox()->botRight.x, ladderRight.getHitbox()->botRight.y));
+	ladderRight.setHitbox(createHitbox(X_MAX - 60, -100, X_MAX, Y_MAX + 100));
 
 	makeGroundSprites();
 	ground = cArena({0, 0}, &groundSprites, PLATEFORM);
@@ -109,8 +136,8 @@ void World::makeEntityMap()
 {
   Line tempLine;
 
-//  tempLine.push_back(&ladderLeft);
-//  tempLine.push_back(&ladderRight);
+  tempLine.push_back(&ladderLeft);
+  tempLine.push_back(&ladderRight);
 
   map.push_back(tempLine);
 
@@ -152,7 +179,7 @@ bool World::OnUserUpdate(float fElapsedTime)
   for (auto const& [key, val] : controls)
     controls[key] = GetKey(key);
 
-  player.update(controls, map, fElapsedTime);
+  player.update(controls, GetMouse(0), map, fElapsedTime);
 
   for (int i; i < minions.size(); i++)
     minions[i].update(player, map, fElapsedTime);
