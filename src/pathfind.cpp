@@ -11,7 +11,7 @@
 
 
 namespace ImpossibleBattleBoss {
-  float pathCosts[COLS][ROWS];
+    float pathCosts[COLS][ROWS];
   olc::vi2d parents[COLS][ROWS];
   bool closedList[COLS][ROWS];
 
@@ -92,7 +92,7 @@ namespace ImpossibleBattleBoss {
         olc::vi2d neighbor = {current.x + neighbor_offsets[i].x, current.y + neighbor_offsets[i].y};
 
         if ((neighbor.x < 0 || neighbor.x >= COLS || neighbor.y < 0 || neighbor.y >= ROWS)
-        ||  (game_map[neighbor.x][neighbor.y] != nullptr)
+        ||  (game_map[neighbor.y][neighbor.x] != nullptr)
         ||  (closedList[neighbor.y][neighbor.x])) {
           continue;
         }

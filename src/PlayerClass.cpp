@@ -16,7 +16,25 @@ cPlayer::cPlayer() : cEntity() {}
 cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites)
 	: cEntity(spawnCoords, createHitbox(0, 0, (*sprites)[IDLE_RIGHT_PLAYER][0]->width, (*sprites)[IDLE_RIGHT_PLAYER][0]->height), (*sprites)[IDLE_RIGHT_PLAYER][0], PLAYER)
 {
-	this->sprites = sprites;
+	olc::vi2d 	coords;
+	Hitbox  	tempHB;
+	for (auto const &[states, vSprites] : (*sprites))
+	{
+		tempHB = getHitbox();
+
+		coords.x = vSprites[0]->width  - (tempHB->botRight.x - tempHB->topLeft.x);
+		coords.y = vSprites[0]->height - (tempHB->botRight.y - tempHB->topLeft.y);
+
+		this->sprites.insert(
+			std::pair<PlayerState, std::pair<std::vector<olc::Sprite *>, olc::vi2d>>(
+				states,
+				std::pair<std::vector<olc::Sprite *>, olc::vi2d>(
+					vSprites, coords
+				)
+			)
+		);
+	}
+
 	state	      = IDLE_RIGHT_PLAYER;
 	isKeyPressed  = false;
 	isRight	      = true;
@@ -26,9 +44,10 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 cPlayer::~cPlayer() {}
 
 
+olc::vi2d 	cPlayer::getPos()	{ return cEntity::getPos() + sprites[state].second; }
 
 PlayerState   cPlayer::getState()		{ return state; }
-olc::Sprite * cPlayer::getCurrentSprite()	{ return (*sprites)[state][cAnimable::animationCounter]; }
+olc::Sprite * cPlayer::getCurrentSprite()	{ return sprites[state].first[cAnimable::animationCounter]; }
 
 void cPlayer::setState(PlayerState newState)
 {
@@ -50,11 +69,50 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 		mouvment.y += GRAVITY * deltaTime;
 	}
 
-	// Mouvment from player input
+
+	mouvment += controlToMouvment(keys, mouse, deltaTime);
+
+	setPos(getPos() + mouvment);
+
+	applyCollisions(map, mouvment);
+
+
+	// Update the sprite :
+
+	cAnimable::animationTime += deltaTime;
+
+	if (cAnimable::animationTime >= 0.1)
+	{
+		cAnimable::animationCounter++;
+		cAnimable::animationCounter = cAnimable::animationCounter % sprites[state].first.size();
+
+		cAnimable::animationTime = 0;
+	}
+}
+
+
+// Supporting functions for update()
+
+olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime)
+{
+	olc::vi2d mouvment = {0, 0};
+
+	if (mouse.bPressed)
+	{
+		if (isRight)
+			setState(ATTACKING_RIGHT_PLAYER);
+		else
+			setState(ATTACKING_LEFT_PLAYER);
+		isAttacking = true;
+	}
+	else if (cAnimable::animationCounter == sprites[ATTACKING_LEFT_PLAYER].first.size() - 1)
+	{
+		isAttacking = false;
+	}
 
 	if (keys[olc::Key::Q].bHeld)
 	{
-		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB()->topLeft.x));
+		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB().topLeft.x));
 
 		isRight = false;
 
@@ -66,7 +124,7 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 	}
 	else if (keys[olc::Key::D].bHeld)
 	{
-		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB()->botRight.x));
+		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB().botRight.x));
 
 		isRight = true;
 
@@ -76,55 +134,87 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 			isKeyPressed = true;
 		}
 	}
-	else if (isKeyPressed)
+	else if (isKeyPressed || !isAttacking)
 	{
 		if (isRight)
 			setState(IDLE_RIGHT_PLAYER);
 		else
 			setState(IDLE_LEFT_PLAYER);
+
 		isKeyPressed = false;
+		isAttacking  = true;
 	}
 
-	if (mouse.bPressed)
-	{
-		if (isRight)
-			setState(ATTACKING_RIGHT_PLAYER);
-		else
-			setState(ATTACKING_LEFT_PLAYER);
-		isKeyPressed = false;
-	}
-
-	setPos(getPos() + mouvment);
+	return mouvment;
+}
 
 
-	// Collisions :
 
+void cPlayer::applyCollisions(std::vector<std::vector<cEntity *>> map, olc::vi2d mouvment)
+{
 	for (auto & line : map)
 	{
 		for (auto & entity : line)
 		{
-			if (isColliding(entity) && (entity->getType() == WALL))
+			if (isColliding(entity))
 			{
-				// TODO : switching between the different types to know what to do with the coords
+				switch ((entity->getType()))
+				{
+				case PLATFORM:
+				{
+					float yDeltaHB;
 
-				switch (((cArena *)entity)->getSubType())
+					if (getPos().y - mouvment.y >= entity->getAbsHB().topLeft.y)
+					{
+						yDeltaHB = getAbsHB().botRight.y - entity->getAbsHB().topLeft.y;
+						setPos({(float) getPos().x, (float) entity->getAbsHB().topLeft.y - yDeltaHB});
+						isInAir = false;
+					}
+					else
+					{
+						yDeltaHB = entity->getAbsHB().botRight.y - getAbsHB().topLeft.y;
+						setPos({(float) getPos().x, (float) entity->getAbsHB().topLeft.y + yDeltaHB});
+					}
+					break;
+				}
+				case PLATFORMARIO:
 				{
-				case PLATEFORM:
+					float yDeltaHB;
+
+					if (getPos().y - mouvment.y >= entity->getAbsHB().topLeft.y)
+					{
+						yDeltaHB = getAbsHB().botRight.y - entity->getAbsHB().topLeft.y;
+						setPos({(float) getPos().x, (float) entity->getAbsHB().topLeft.y - yDeltaHB});
+						isInAir = false;
+					}
+					break;
+				}
+				case LADDER:
 				{
-					int yDeltaHB = entity->getHitbox()->botRight.y - entity->getHitbox()->topLeft.y;
-					setPos({getPos().x, entity->getAbsHB()->topLeft.y - yDeltaHB});
+					float xDeltaHB;
+					
+					if (getPos().x > X_MIDDLE)
+					{
+						// Right Ladder
+					
+						xDeltaHB = getAbsHB().botRight.x - entity->getAbsHB().topLeft.x;
+					}
+					else
+					{
+						// Left Ladder
+
+						xDeltaHB = entity->getAbsHB().botRight.x - getAbsHB().topLeft.x;
+					}
+					setPos({getPos().x + xDeltaHB, (float) getPos().y});
 					isInAir = false;
 					break;
 				}
 
-				case LADDER:
+				case MINION:
 				{
-					if (isRight)
-						std::cout << "right" << std::endl;
-					else
+					if (!isAttacking)
 					{
-						std::cout << "left" << std::endl;
-						
+						setHP(getHP() - ATTACK_POWER_MINION);
 					}
 					break;
 				}
@@ -132,18 +222,4 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 			}
 		}
 	}
-
-
-	// Update the sprite :
-
-	cAnimable::animationTime += deltaTime;
-
-	if (cAnimable::animationTime >= 0.1)
-	{
-		cAnimable::animationCounter++;
-		cAnimable::animationCounter = cAnimable::animationCounter % (*sprites)[state].size();
-
-		cAnimable::animationTime = 0;
-	}
 }
-

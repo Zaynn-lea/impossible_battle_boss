@@ -11,8 +11,9 @@ namespace ImpossibleBattleBoss
 {
 	enum ArenaType
 	{
-		PLATEFORM,
-		LADDER
+		ARENA_PLATEFORM,
+		ARENA_PLATEFORMARIO,
+		ARENA_LADDER
 	};
 
 	class cArena : public cEntity, cAnimable

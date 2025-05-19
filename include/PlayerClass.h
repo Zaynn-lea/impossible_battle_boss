@@ -21,6 +21,9 @@ namespace ImpossibleBattleBoss
     HURT_PLAYER
   };
 
+  typedef std::map<PlayerState, std::vector<olc::Sprite *>> PlayerSpriteMap;
+  typedef std::pair<std::vector<olc::Sprite *>, olc::vi2d> PlayerSpriteVectorPair;
+
   class cPlayer : public cEntity, cAnimable
   {
     public:
@@ -31,20 +34,24 @@ namespace ImpossibleBattleBoss
     private:
       PlayerState state;
       bool	  isKeyPressed;
+      bool    isAttacking;
       bool	  isRight;
       bool	  isInAir;
 
-      std::map<PlayerState, std::vector<olc::Sprite *>> * sprites;
+      std::map<PlayerState, std::pair<std::vector<olc::Sprite *>, olc::vi2d>> sprites;
 
       olc::vi2d velocity;
 
     public:
       PlayerState   getState();
       olc::Sprite * getCurrentSprite();
+      olc::vi2d     getPos();
 
       void setState(PlayerState state);
 
     public:
       void update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime);
+      olc::vi2d	controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime);
+      void	applyCollisions(std::vector<std::vector<cEntity *>> map, olc::vi2d mouvment);
   };
 };

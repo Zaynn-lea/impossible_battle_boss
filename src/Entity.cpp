@@ -11,7 +11,7 @@ namespace ImpossibleBattleBoss
 using namespace ImpossibleBattleBoss;
 
 
-  cEntity::~cEntity(){} 
+    cEntity::~cEntity(){delete hitbox; hitbox = nullptr;} 
 
 	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight)
 	{
@@ -42,12 +42,12 @@ using namespace ImpossibleBattleBoss;
 	}
 
 	Hitbox cEntity::getHitbox() { return hitbox; }
-	Hitbox cEntity::getAbsHB()
+	_hitbox cEntity::getAbsHB()
 	{
-		Hitbox absHb = new _hitbox();
-
-		absHb->topLeft  = pos + hitbox->topLeft;
-		absHb->botRight = pos + hitbox->botRight;
+		_hitbox absHb;
+		
+		absHb.topLeft  = pos + hitbox->topLeft;
+		absHb.botRight = pos + hitbox->botRight;
 
 		return absHb;
 	}
@@ -63,6 +63,8 @@ using namespace ImpossibleBattleBoss;
 
 	bool cEntity::isColliding(cEntity *other)
 	{
+		if (other == NULL)
+			return false;
 		bool vertAlign, horzAlign;
 
 		olc::vi2d selfStart, selfEnd, compStart, compEnd;
@@ -70,10 +72,10 @@ using namespace ImpossibleBattleBoss;
 		Hitbox absHitbox;
 
 
-		selfStart = getAbsHB()->topLeft;
-		selfEnd   = getAbsHB()->botRight;
-		compStart = other->getAbsHB()->topLeft;
-		compEnd   = other->getAbsHB()->botRight;
+		selfStart = getAbsHB().topLeft;
+		selfEnd   = getAbsHB().botRight;
+		compStart = other->getAbsHB().topLeft;
+		compEnd   = other->getAbsHB().botRight;
 
 		vertAlign = std::max(selfStart.x, compStart.x) <= std::min(selfEnd.x, compEnd.x);
 		horzAlign = std::max(selfStart.y, compStart.y) <= std::min(selfEnd.y, compEnd.y);

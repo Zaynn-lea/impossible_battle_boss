@@ -23,7 +23,10 @@ namespace ImpossibleBattleBoss
 		PLAYERATTAC,
 		BOSS,
 		MINION,
-		OBSCTACLE
+		OBSCTACLE,
+		PLATFORM,
+		LADDER,
+		PLATFORMARIO,
 	};
 
 
@@ -43,7 +46,7 @@ namespace ImpossibleBattleBoss
 
 	public:
 		Hitbox 		getHitbox();
-		Hitbox 		getAbsHB();
+		_hitbox 		getAbsHB();
 		int		getHP();
 		olc::vf2d 	getPos();
 		olc::Sprite *	getSprite();
