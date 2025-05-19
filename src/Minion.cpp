@@ -14,6 +14,9 @@ cMinion::cMinion(olc::vi2d spawnPos, std::map<MinionState, std::vector<olc::Spri
 {
 	this->sprites	= sprites;
 	state 		= ALIVE_MINION;
+
+	setHP(HP_MINION);
+//	std::cout << ".w." << std::endl;
 }
 
 
@@ -50,7 +53,13 @@ void cMinion::update(cPlayer* p, Grid map, float deltaTime){
 
   if (isColliding(p))
   {
-      setState(DYING_MINION);
       setHP(0);
+
+      if (!p->getAttackState())
+      {
+        p->takeDamage(ATTACK_POWER_MINION);
+      }
+
+      cMinion::~cMinion();
   }
 }

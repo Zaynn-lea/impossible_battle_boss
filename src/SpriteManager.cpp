@@ -149,7 +149,7 @@ namespace ImpossibleBattleBoss
         bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(ATTACKING4_BOSS, tempSprites[4]));
         bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(ATTACKING5_BOSS, tempSprites[5]));
 
-        //bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(IDLE_BOSS, tempSprites[6]));
+        bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(IDLE_BOSS, tempSprites[6]));
         bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(MSPAWNING_BOSS, tempSprites[7]));
 
 

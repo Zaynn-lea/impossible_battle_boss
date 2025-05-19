@@ -1,3 +1,4 @@
+
 #include "Minion.h"
 #include "Arena.h"
 #include "config.h"
@@ -16,12 +17,15 @@ using namespace ImpossibleBattleBoss;
 bool World::OnUserCreate()
 {
   srand(time(NULL));
-  genMap(25);
+  genMap(5);
 
   makePlayerControls();
 
-  player = cPlayer({130, 170}, spriteManager.getPlayerSprites());
+  player = cPlayer({128, 0}, spriteManager.getPlayerSprites());
   boss = cBoss(new olc::Sprite("../assests/Boss/bosia.png"), spriteManager.getBossSprites(), spriteManager.getBossFireHeadSprites());
+
+  spawnMinion();
+
   return true;
 }
 
@@ -37,7 +41,7 @@ bool World::OnUserUpdate(float fElapsedTime)
   //
   // Player Logic
   //
-  //player.update(controls, GetMouse(0), map, fElapsedTime);
+  player.update(controls, GetMouse(0), map, fElapsedTime);
   
   //
   // Minion Logic
@@ -65,7 +69,6 @@ bool World::OnUserUpdate(float fElapsedTime)
   boss.update(&player, fElapsedTime);
   if (boss.getTriggerMinions() == true)
   {
-    spawnMinion();
     boss.setTriggerMinions(false);
   }
 
@@ -85,17 +88,15 @@ bool World::OnUserUpdate(float fElapsedTime)
   DrawSprite(boss.getPos(), boss.getFireHeadSprite());
   DrawSprite(boss.getPos(), boss.getBackgroundSprite());
 
-  // Draw Arena
   DrawSprite(arena.getPos(), arena.getCurrentSprite());
+  DrawSprite(ground.getPos(), spriteManager.getGroundSprite());
   DrawSprite(ground.getPos(), ground.getCurrentSprite());
 
-  // Draw Player
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
   // Draw Boss foreground
   DrawSprite(boss.getPos(), boss.getForegroundSprite());
 
-  // Draw Minions
   for (int i = 0; i < minions.size(); i++)
   {
     DrawSprite(minions[i]->getPos(), minions[i]->getCurrentSprite());
@@ -111,10 +112,6 @@ bool World::OnUserUpdate(float fElapsedTime)
       if (entity != NULL)
         drawHitbox(entity);
     }
-  }
-  for (int i = 0; i < minions.size(); i++)
-  {
-    drawHitbox(minions[i]);
   }
 
   drawHitbox(&player);

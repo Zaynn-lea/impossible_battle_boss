@@ -38,6 +38,8 @@ namespace ImpossibleBattleBoss
       bool	  isRight;
       bool	  isInAir;
 
+      float timeInAir;
+
       std::map<PlayerState, std::pair<std::vector<olc::Sprite *>, olc::vi2d>> sprites;
 
       olc::vi2d velocity;
@@ -46,6 +48,7 @@ namespace ImpossibleBattleBoss
       PlayerState   getState();
       olc::Sprite * getCurrentSprite();
       olc::vf2d     getPos();
+      bool	    getAttackState();
 
       void setState(PlayerState state);
 
@@ -53,5 +56,7 @@ namespace ImpossibleBattleBoss
       void update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime);
       olc::vi2d	controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime);
       void	applyCollisions(Grid map, olc::vi2d mouvment);
+
+      void takeDamage(int amount);
   };
 };

@@ -18,12 +18,13 @@ cPlayer::cPlayer(olc::vi2d spawnCoords,  PlayerSpriteMap* sprites)
 {
 	olc::vi2d 	coords;
 	Hitbox  	tempHB;
+
 	for (auto const &[states, vSprites] : (*sprites))
 	{
 		tempHB = getHitbox();
 
-		coords.x = vSprites[0]->width  - (tempHB.botRight.x - tempHB.topLeft.x);
-		coords.y = vSprites[0]->height - (tempHB.botRight.y - tempHB.topLeft.y);
+		coords.x = (*sprites)[IDLE_RIGHT_PLAYER][0]->width  - vSprites[0]->width;
+		coords.y = (*sprites)[IDLE_RIGHT_PLAYER][0]->height - vSprites[0]->height;
 
 		this->sprites.insert(
 			std::pair<PlayerState, std::pair<std::vector<olc::Sprite *>, olc::vi2d>>(
@@ -39,12 +40,15 @@ cPlayer::cPlayer(olc::vi2d spawnCoords,  PlayerSpriteMap* sprites)
 	isKeyPressed  = false;
 	isRight	      = true;
 	isInAir	      = true;
+	timeInAir     = 0.0;
+
+	setHP(HP_PLAYER);
 }
 
 cPlayer::~cPlayer() {}
 
 
-olc::vf2d 	cPlayer::getPos()	{ return cEntity::getPos(); /* + sprites[state].second; */ }
+olc::vf2d 	cPlayer::getPos()	{ return cEntity::getPos() + sprites[state].second; }
 
 PlayerState   cPlayer::getState()		{ return state; }
 olc::Sprite * cPlayer::getCurrentSprite()	{ return sprites[state].first[cAnimable::animationCounter]; }
@@ -55,6 +59,8 @@ void cPlayer::setState(PlayerState newState)
 	cAnimable::animationSpeed   = 0;
 	state = newState;
 }
+
+bool cPlayer::getAttackState()	{ return (getState() == ATTACKING_RIGHT_PLAYER) || (getState() == ATTACKING_LEFT_PLAYER); }
 
 
 void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime)
@@ -67,11 +73,9 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 		mouvment.y += GRAVITY * deltaTime;
 	}
 
-	//mouvment += controlToMouvment(keys, mouse, deltaTime);
-    // setPos(getPos() + mouvment);
-	olc::vf2d b = getPos() + mouvment;
+	mouvment += controlToMouvment(keys, mouse, deltaTime);
 
-	setPos(b);
+	setPos(cEntity::getPos() + mouvment);
 
 	applyCollisions(map, mouvment);
 	if (getPos().y >= Y_MAX)
@@ -79,7 +83,6 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 		setPos({(float) getPos().x, (float) Y_MAX});
 		isInAir = false;
 	}
-
 
 	// Update the sprite :
 
@@ -112,10 +115,23 @@ olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc
 		isAttacking = false;
 	}
 
+	if ((keys[olc::Key::SPACE].bPressed) || (timeInAir <= PLAYER_JUMP_TIME))
+	{
+		mouvment.y -= PLAYER_JUMP_CAPACITY * deltaTime;
+
+		timeInAir += deltaTime;
+
+		if (!isInAir)
+		{
+			timeInAir = 0.0;
+			isInAir = true;
+		}
+	}
+
 	if (keys[olc::Key::Q].bHeld)
 	{
 		//mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB().topLeft.x));
-		mouvment.x -= PLAYER_SPEED * deltaTime; 
+		mouvment.x -= PLAYER_SPEED * deltaTime;
 
 		isRight = false;
 
@@ -197,34 +213,36 @@ void cPlayer::applyCollisions(Grid map, olc::vi2d mouvment)
 				case LADDER:
 				{
 					float xDeltaHB;
-					
+
 					if (getPos().x > X_MIDDLE)
 					{
 						// Right Ladder
-					
 						xDeltaHB = getAbsHB().botRight.x - entity->getAbsHB().topLeft.x;
+						setPos({getPos().x - xDeltaHB, (float) getPos().y});
 					}
 					else
 					{
 						// Left Ladder
-
 						xDeltaHB = entity->getAbsHB().botRight.x - getAbsHB().topLeft.x;
+						setPos({getPos().x + xDeltaHB, (float) getPos().y});
 					}
-					setPos({getPos().x + xDeltaHB, (float) getPos().y});
-					isInAir = false;
-					break;
-				}
 
-				case MINION:
-				{
-					if (!isAttacking)
-					{
-						setHP(getHP() - ATTACK_POWER_MINION);
-					}
+					isInAir = false;
 					break;
 				}
 				}
 			}
 		}
 	}
+}
+
+
+void cPlayer::takeDamage(int amount)
+{
+	setHP(getHP() - amount);
+
+	// setState(HURT_PLAYER);
+
+	if (getHP() == 0)
+		cPlayer::~cPlayer();
 }
