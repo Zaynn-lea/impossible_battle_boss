@@ -28,7 +28,7 @@ namespace ImpossibleBattleBoss
   {
     public:
       cPlayer();
-      cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites);
+      cPlayer(olc::vi2d spawnCoords, PlayerSpriteMap* sprites);
       ~cPlayer();
 
     private:
@@ -45,13 +45,13 @@ namespace ImpossibleBattleBoss
     public:
       PlayerState   getState();
       olc::Sprite * getCurrentSprite();
-      olc::vi2d     getPos();
+      olc::vf2d     getPos();
 
       void setState(PlayerState state);
 
     public:
       void update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime);
       olc::vi2d	controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime);
-      void	applyCollisions(std::vector<std::vector<cEntity *>> map, olc::vi2d mouvment);
+      void	applyCollisions(Grid map, olc::vi2d mouvment);
   };
 };

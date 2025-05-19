@@ -1,12 +1,9 @@
-
-
 #pragma once
-
 
 #include "Animable.h"
 #include "Entity.h"
 #include "olcPixelGameEngine.h"
-#include "PlayerClass.h"
+#include "Player.h"
 
 
 namespace ImpossibleBattleBoss
@@ -43,6 +40,8 @@ namespace ImpossibleBattleBoss
 		int attackSpot = 0;
 		int fireHeadCounter = 0;
 		void setState(BossState newState);
+		void setAttackSpot(int attackSpot);
+		bool triggerMinions = false;
 		
 		olc::Sprite* backgroundSprite; 
 		olc::Sprite* foregroundSprite;
@@ -50,10 +49,12 @@ namespace ImpossibleBattleBoss
 
 
 	public:
-		olc::Sprite * getCurrentSprite();
+		olc::Sprite* getCurrentSprite();
 		olc::Sprite* getFireHeadSprite();
 		olc::Sprite* getBackgroundSprite() { return backgroundSprite; }
 		olc::Sprite* getForegroundSprite() { return foregroundSprite; }
+		void setTriggerMinions(bool trigger) { triggerMinions = trigger; }
+		bool getTriggerMinions() { return triggerMinions; }
 
 		void update(cPlayer* p, float deltaTime);
 	};

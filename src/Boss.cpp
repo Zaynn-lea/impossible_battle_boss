@@ -1,7 +1,7 @@
 #include "Boss.h"
 #include "config.h"
 #include "olcPixelGameEngine.h"
-#include "PlayerClass.h"
+#include "Player.h"
 #include <cassert>
 
 using namespace ImpossibleBattleBoss;
@@ -22,12 +22,14 @@ cBoss::~cBoss() {}
 
 olc::Sprite *cBoss::getCurrentSprite()
 {
-	if (state == IDLE_BOSS){
+	if (state == IDLE_BOSS)
+	{
 		assert(sprites[state].first.size() == 1);
 		backgroundSprite = sprites[state].first[0];
 		foregroundSprite = sprites[state].second[0];
 	}
-	else {
+	else
+	{
 		if (animationCounter >= sprites[state].second.size())
 		{
 			animationCounter = 0;
@@ -37,7 +39,6 @@ olc::Sprite *cBoss::getCurrentSprite()
 		backgroundSprite = sprites[state].first[animationCounter];
 		foregroundSprite = sprites[state].second[animationCounter];
 	}
-	
 
 	return getSprite();
 }
@@ -54,7 +55,32 @@ olc::Sprite *cBoss::getFireHeadSprite()
 	return fireHeadSprites[fireHeadCounter];
 }
 
-void cBoss::update(cPlayer* p, float deltaTIme)
+void cBoss::setAttackSpot(int attackSpot)
+{
+	switch (attackSpot)
+	{
+	case 0:
+		setState(ATTACKING0_BOSS);
+		break;
+	case 1:
+		setState(ATTACKING1_BOSS);
+		break;
+	case 2:
+		setState(ATTACKING2_BOSS);
+		break;
+	case 3:
+		setState(ATTACKING3_BOSS);
+		break;
+	case 4:
+		setState(ATTACKING4_BOSS);
+		break;
+	case 5:
+		setState(ATTACKING5_BOSS);
+		break;
+	}
+}
+
+void cBoss::update(cPlayer *p, float deltaTIme)
 {
 	animationTime += deltaTIme;
 	idleTime += deltaTIme;
@@ -69,50 +95,44 @@ void cBoss::update(cPlayer* p, float deltaTIme)
 
 	if (state == IDLE_BOSS)
 	{
+		if (idleTime >= 3.0f)
+		{
+			idleTime = 0;
+			int randAttack = rand() % 2;
+			if (randAttack < 1)
+			{
+				setTriggerMinions(true);
+				setState(MSPAWNING_BOSS);
+			}
+			else
+			{
+				attackSpot = getGridPositionId(p);
+				setAttackSpot(attackSpot);
+			}
+		}
+	}
+	else if (state == MSPAWNING_BOSS)
+	{
 		if (idleTime >= 5.0f)
 		{
 			idleTime = 0;
-			attackSpot = getGridPositionId(p);
-			int randAttack = rand() % 6;
-			
-			switch (attackSpot)
-			{
-			case 0:
-				std::cout << "Attack spot 0" << std::endl;
-				setState(ATTACKING0_BOSS);
-				break;
-			case 1:
-				std::cout << "Attack spot 1" << std::endl;
-				setState(ATTACKING1_BOSS);
-				break;
-			case 2:
-				std::cout << "Attack spot 2" << std::endl;
-				setState(ATTACKING2_BOSS);
-				break;
-			case 3:
-				std::cout << "Attack spot 3" << std::endl;
-				setState(ATTACKING3_BOSS);
-				break;
-			case 4:
-				std::cout << "Attack spot 4" << std::endl;
-				setState(ATTACKING4_BOSS);
-				break;
-			case 5:
-				std::cout << "Attack spot 5" << std::endl;
-				setState(ATTACKING5_BOSS);
-				break;
-			}
+			setState(IDLE_BOSS);
 		}
 	}
 	else
 	{
+		if (animationCounter >= sprites[state].first.size())
+		{
+			animationCounter = 0;
+			idleTime = 0;
+			setState(IDLE_BOSS);
+		}
 	}
 }
 
-int cBoss::getGridPositionId(cPlayer* player)
+int cBoss::getGridPositionId(cPlayer *player)
 {
 	int column_index = (player->getPos().x < XSIZE / 2.0) ? 1 : 0;
-	std::cout << "Column index: " << column_index << std::endl;
 
 	int row_index = 0;
 	double row_height = static_cast<double>(YSIZE) / 3.0;
@@ -130,7 +150,6 @@ int cBoss::getGridPositionId(cPlayer* player)
 		row_index = 2;
 	}
 
-	std::cout << "Row index: " << row_index << std::endl;
 	const int num_cols = 2;
 	int grid_id = row_index * 2 + column_index;
 

@@ -14,6 +14,11 @@
 const int XSIZE = X_MAX / COLS;
 const int YSIZE = Y_MAX / ROWS;
 
+// 0 EMPTY
+// 1 WALL
+// 2 PLATFORM
+// 3 PLATFORMARIO
+// 4 LADDER
 const int MAP[ROWS][COLS] = {
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -26,13 +31,13 @@ const int MAP[ROWS][COLS] = {
     {4,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
     {4,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
     {4,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
-    {1,0,1,1,1,1,0,0,0,1,1,1,1,0,1},
+    {1,0,3,3,3,3,0,0,0,3,3,3,3,0,3},
 };
 // Phisics
-#define GRAVITY		    420
+#define GRAVITY		    50
 
 // Player
-#define PLAYER_SPEED	    420	// nice
+#define PLAYER_SPEED	    1
 #define HP_PLAYER           5
 #define ATTACK_POWER_MINION 1
 

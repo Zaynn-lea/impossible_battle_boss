@@ -11,7 +11,7 @@ namespace ImpossibleBattleBoss
 		olc::vi2d topLeft;
 		olc::vi2d botRight;
 	};
-	typedef struct _hitbox * Hitbox;
+	typedef struct _hitbox Hitbox;
 
 	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight);
 

@@ -4,7 +4,7 @@
 #include "config.h"
 #include "Entity.h"
 #include "Arena.h"
-#include "PlayerClass.h"
+#include "Player.h"
 #include "olcPixelGameEngine.h"
 
 
@@ -13,7 +13,7 @@ using namespace ImpossibleBattleBoss;
 
 cPlayer::cPlayer() : cEntity() {}
 
-cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::Sprite *>> * sprites)
+cPlayer::cPlayer(olc::vi2d spawnCoords,  PlayerSpriteMap* sprites)
 	: cEntity(spawnCoords, createHitbox(0, 0, (*sprites)[IDLE_RIGHT_PLAYER][0]->width, (*sprites)[IDLE_RIGHT_PLAYER][0]->height), (*sprites)[IDLE_RIGHT_PLAYER][0], PLAYER)
 {
 	olc::vi2d 	coords;
@@ -22,8 +22,8 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 	{
 		tempHB = getHitbox();
 
-		coords.x = vSprites[0]->width  - (tempHB->botRight.x - tempHB->topLeft.x);
-		coords.y = vSprites[0]->height - (tempHB->botRight.y - tempHB->topLeft.y);
+		coords.x = vSprites[0]->width  - (tempHB.botRight.x - tempHB.topLeft.x);
+		coords.y = vSprites[0]->height - (tempHB.botRight.y - tempHB.topLeft.y);
 
 		this->sprites.insert(
 			std::pair<PlayerState, std::pair<std::vector<olc::Sprite *>, olc::vi2d>>(
@@ -44,7 +44,7 @@ cPlayer::cPlayer(olc::vi2d spawnCoords, std::map<PlayerState, std::vector<olc::S
 cPlayer::~cPlayer() {}
 
 
-olc::vi2d 	cPlayer::getPos()	{ return cEntity::getPos() + sprites[state].second; }
+olc::vf2d 	cPlayer::getPos()	{ return cEntity::getPos(); /* + sprites[state].second; */ }
 
 PlayerState   cPlayer::getState()		{ return state; }
 olc::Sprite * cPlayer::getCurrentSprite()	{ return sprites[state].first[cAnimable::animationCounter]; }
@@ -53,28 +53,32 @@ void cPlayer::setState(PlayerState newState)
 {
 	cAnimable::animationCounter = 0;
 	cAnimable::animationSpeed   = 0;
-
 	state = newState;
 }
 
 
 void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, std::vector<std::vector<cEntity *>> map, float deltaTime)
 {
-	olc::vi2d mouvment = {0, 0};
+	olc::vf2d mouvment = {0, 0};
 
 	// Gravity and falling down :
-
 	if (isInAir)
 	{
 		mouvment.y += GRAVITY * deltaTime;
 	}
 
+	//mouvment += controlToMouvment(keys, mouse, deltaTime);
+    // setPos(getPos() + mouvment);
+	olc::vf2d b = getPos() + mouvment;
 
-	mouvment += controlToMouvment(keys, mouse, deltaTime);
-
-	setPos(getPos() + mouvment);
+	setPos(b);
 
 	applyCollisions(map, mouvment);
+	if (getPos().y >= Y_MAX)
+	{
+		setPos({(float) getPos().x, (float) Y_MAX});
+		isInAir = false;
+	}
 
 
 	// Update the sprite :
@@ -95,14 +99,12 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 
 olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse, float deltaTime)
 {
-	olc::vi2d mouvment = {0, 0};
+	olc::vf2d mouvment = {0, 0};
 
 	if (mouse.bPressed)
 	{
-		if (isRight)
-			setState(ATTACKING_RIGHT_PLAYER);
-		else
-			setState(ATTACKING_LEFT_PLAYER);
+		if (isRight) setState(ATTACKING_RIGHT_PLAYER);
+		else setState(ATTACKING_LEFT_PLAYER);
 		isAttacking = true;
 	}
 	else if (cAnimable::animationCounter == sprites[ATTACKING_LEFT_PLAYER].first.size() - 1)
@@ -112,7 +114,8 @@ olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc
 
 	if (keys[olc::Key::Q].bHeld)
 	{
-		mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB().topLeft.x));
+		//mouvment.x -= std::min(PLAYER_SPEED * deltaTime, (float) (getAbsHB().topLeft.x));
+		mouvment.x -= PLAYER_SPEED * deltaTime; 
 
 		isRight = false;
 
@@ -124,7 +127,9 @@ olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc
 	}
 	else if (keys[olc::Key::D].bHeld)
 	{
-		mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB().botRight.x));
+
+		//mouvment.x += std::min(PLAYER_SPEED * deltaTime, (float) (X_MAX - getAbsHB().botRight.x));
+		mouvment.x += PLAYER_SPEED * deltaTime;
 
 		isRight = true;
 
@@ -149,17 +154,17 @@ olc::vi2d cPlayer::controlToMouvment(std::map<olc::Key, olc::HWButton> keys, olc
 }
 
 
-
-void cPlayer::applyCollisions(std::vector<std::vector<cEntity *>> map, olc::vi2d mouvment)
+void cPlayer::applyCollisions(Grid map, olc::vi2d mouvment)
 {
 	for (auto & line : map)
 	{
 		for (auto & entity : line)
 		{
+			if (entity == NULL)
+				continue;
 			if (isColliding(entity))
 			{
-				switch ((entity->getType()))
-				{
+				switch ((entity->getType())){
 				case PLATFORM:
 				{
 					float yDeltaHB;

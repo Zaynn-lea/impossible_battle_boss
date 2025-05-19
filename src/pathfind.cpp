@@ -5,7 +5,7 @@
 
 #include "olcPixelGameEngine.h"
 #include "Minion.h"
-#include "PlayerClass.h"
+#include "Player.h"
 #include "config.h"
 #include "pathfind.h"
 
@@ -15,7 +15,6 @@ namespace ImpossibleBattleBoss {
   olc::vi2d parents[COLS][ROWS];
   bool closedList[COLS][ROWS];
 
-  // --- Fonctions Utilitaires Originales ---
   olc::vi2d getPosInGrid(olc::vi2d pixelPos) {
     return olc::vi2d(pixelPos.x / XSIZE, pixelPos.y / YSIZE);
   }
@@ -114,9 +113,9 @@ namespace ImpossibleBattleBoss {
     return {-1, -1}; // Pas de chemin trouvé
   }
 
-  olc::vi2d pathFind(cMinion m, cPlayer p, Grid game_map) {
-    olc::vi2d minion_grid_pos = getPosInGrid(m.getPos());
-    olc::vi2d player_grid_pos = getPosInGrid(p.getPos());
+  olc::vi2d pathFind(cMinion* m, cPlayer* p, Grid game_map) {
+    olc::vi2d minion_grid_pos = getPosInGrid(m->getPos());
+    olc::vi2d player_grid_pos = getPosInGrid(p->getPos());
 
     return aStar(game_map, minion_grid_pos, player_grid_pos);
   }

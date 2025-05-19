@@ -11,11 +11,11 @@ namespace ImpossibleBattleBoss
 using namespace ImpossibleBattleBoss;
 
 
-    cEntity::~cEntity(){delete hitbox; hitbox = nullptr;} 
+    cEntity::~cEntity(){} 
 
 	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight)
 	{
-		Hitbox hitbox = new _hitbox;
+		Hitbox hitbox;
 
 		olc::vi2d topLeft;
 		topLeft.x = xTopLeft;
@@ -25,8 +25,8 @@ using namespace ImpossibleBattleBoss;
 		botRight.x = xBottomRight;
 		botRight.y = yBottomRight;
 
-		hitbox->topLeft = topLeft;
-		hitbox->botRight = botRight;
+		hitbox.topLeft = topLeft;
+		hitbox.botRight = botRight;
 
 		return hitbox;
 	}
@@ -46,8 +46,8 @@ using namespace ImpossibleBattleBoss;
 	{
 		_hitbox absHb;
 		
-		absHb.topLeft  = pos + hitbox->topLeft;
-		absHb.botRight = pos + hitbox->botRight;
+		absHb.topLeft  = pos + hitbox.topLeft;
+		absHb.botRight = pos + hitbox.botRight;
 
 		return absHb;
 	}

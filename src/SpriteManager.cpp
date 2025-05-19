@@ -1,7 +1,7 @@
 
 
 #include "SpriteManager.h"
-#include "PlayerClass.h"
+#include "Player.h"
 #include "Boss.h"
 #include "Minion.h"
 #include "config.h"
@@ -33,6 +33,10 @@ namespace ImpossibleBattleBoss
 
         // Load minion sprites
         loadMinionSprites();
+
+        // Load ground sprites
+        loadGroundSprites();
+
     }
 
     SpriteManager::~SpriteManager()
@@ -45,6 +49,17 @@ namespace ImpossibleBattleBoss
 
         // Unload minion sprites
         unloadMinionSprites();
+
+        // Unload ground sprites
+        unloadGroundSprites();
+
+        // Unload transparent sprite
+        delete transparentSprite;
+        transparentSprite = nullptr;
+        delete groundSprite;
+        groundSprite = nullptr;
+        delete arenaSprite;
+        arenaSprite = nullptr;
     }
 
     void SpriteManager::loadPlayerSprites()
@@ -73,6 +88,7 @@ namespace ImpossibleBattleBoss
             playerSprites[ATTACKING_LEFT_PLAYER].push_back(new olc::Sprite(assertPathExists("../assests/attack/proj_IA_attaque_left-" + std::to_string(i) + ".png")));
         }
     }
+
     void SpriteManager::unloadPlayerSprites()
     {
         for (auto &pair : playerSprites)
@@ -90,7 +106,7 @@ namespace ImpossibleBattleBoss
         std::cout << "Loading boss sprites..." << std::endl;
 	
         std::vector<BossSpriteVectorPair> tempSprites;
-        tempSprites.resize(7);
+        tempSprites.resize(8);
 
         for (int i = 0; i < 13; i++){
             //0
@@ -106,16 +122,23 @@ namespace ImpossibleBattleBoss
             tempSprites[3].first.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/3/background/background-" + std::to_string(i) + ".png")));
             tempSprites[3].second.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/3/foreground/foreground-" + std::to_string(i) + ".png")));
             //4
-            tempSprites[4].first.push_back(transparentSprite);
+            tempSprites[4].first.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/4/background/background-" + std::to_string(i) + ".png")));
             tempSprites[4].second.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/4/foreground/foreground-" + std::to_string(i) + ".png")));
 
             //5
-            tempSprites[5].first.push_back(transparentSprite);
+            tempSprites[5].first.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/5/background/background-" + std::to_string(i) + ".png")));
             tempSprites[5].second.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/5/foreground/foreground-" + std::to_string(i) + ".png")));
         }
         //6
-        tempSprites[6].first.push_back(transparentSprite);
+        tempSprites[6].first.push_back(new olc::Sprite(assertPathExists("../assests/Boss/idle.png")));
         tempSprites[6].second.push_back(transparentSprite);
+
+        //7
+        for (int i = 0; i < 6; i++)
+        {
+            tempSprites[7].first.push_back(new olc::Sprite(assertPathExists("../assests/Boss/Attacks/MSPAWN/background-" + std::to_string(i) + ".png")));
+            tempSprites[7].second.push_back(transparentSprite);
+        }
 
     
         
@@ -126,7 +149,8 @@ namespace ImpossibleBattleBoss
         bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(ATTACKING4_BOSS, tempSprites[4]));
         bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(ATTACKING5_BOSS, tempSprites[5]));
 
-        bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(IDLE_BOSS, tempSprites[6]));
+        //bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(IDLE_BOSS, tempSprites[6]));
+        bossSprites.insert(std::pair<BossState, BossSpriteVectorPair>(MSPAWNING_BOSS, tempSprites[7]));
 
 
         for (int i = 0; i < 6; i++)
@@ -164,18 +188,13 @@ namespace ImpossibleBattleBoss
     void SpriteManager::loadMinionSprites()
     {
         std::vector<olc::Sprite *> tempSprites;
-
         for (int i = 0; i < 4; i++)
         {
             tempSprites.push_back(new olc::Sprite(assertPathExists("../assests/minion/bouledefeu-" + std::to_string(i) + ".png")));
         }
-
         minionSprites.insert(std::pair<MinionState, std::vector<olc::Sprite *>>(ALIVE_MINION, tempSprites));
-
         tempSprites.clear();
-
     //	tempSprites.push_back(new olc::Sprite("../assests/minion/-0.png"));    // TODO
-
         minionSprites.insert(std::pair<MinionState, std::vector<olc::Sprite *>>(DYING_MINION, tempSprites));
     }
 
@@ -189,5 +208,22 @@ namespace ImpossibleBattleBoss
             }
         }
         minionSprites.clear();
+    }
+
+    void SpriteManager::loadGroundSprites()
+    {
+        for (int i = 1; i < 4; ++i)
+        {
+            groundSprites.push_back(new olc::Sprite(assertPathExists("../assests/ground/solseul-" + std::to_string(i) + ".png")));
+        }
+    }
+
+    void SpriteManager::unloadGroundSprites()
+    {
+        for (auto sprite : groundSprites)
+        {
+            delete sprite;
+        }
+        groundSprites.clear();
     }
 }
