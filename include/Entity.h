@@ -11,7 +11,7 @@ namespace ImpossibleBattleBoss
 		olc::vi2d topLeft;
 		olc::vi2d botRight;
 	};
-	typedef struct _hitbox * Hitbox;
+	typedef struct _hitbox Hitbox;
 
 	Hitbox createHitbox(int xTopLeft, int yTopLeft, int xBottomRight, int yBottomRight);
 
@@ -23,7 +23,10 @@ namespace ImpossibleBattleBoss
 		PLAYERATTAC,
 		BOSS,
 		MINION,
-		OBSCTACLE
+		OBSCTACLE,
+		PLATFORM,
+		LADDER,
+		PLATFORMARIO,
 	};
 
 
@@ -43,9 +46,11 @@ namespace ImpossibleBattleBoss
 
 	public:
 		Hitbox 		getHitbox();
+		_hitbox 		getAbsHB();
 		int		getHP();
 		olc::vf2d 	getPos();
 		olc::Sprite *	getSprite();
+		EntityType	getType();
 
 		void setHitbox(Hitbox newHitbox);
 		void setHP(int newHP);

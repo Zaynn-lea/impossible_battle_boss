@@ -1,9 +1,11 @@
+
 #include "Minion.h"
+#include "Arena.h"
 #include "config.h"
 #include "engine.h"
 #include "Entity.h"
 #include "olcPixelGameEngine.h"
-#include "PlayerClass.h"
+#include "Player.h"
 #include "Boss.h"
 #include <cstddef>
 #include <cstdlib>
@@ -12,61 +14,107 @@
 
 using namespace ImpossibleBattleBoss;
 
-
-void World::genMap(int density){
-  Hitbox wallhitbox = createHitbox(0, 0, XSIZE, YSIZE);
-  for(int i = 0 ; i<ROWS; ++i){
-    Line line;
-    map.push_back(line);
-    for (int j = 0; j<COLS; ++j){
-      if ((i == 0) || (i == ROWS-1) ||
-          (j == 0) || (j == COLS-1))
-      {
-        cEntity* e = new cEntity(olc::vf2d(i*XSIZE,j*YSIZE),wallhitbox,NULL,WALL);
-        map[i].push_back(e);
-      } else
-      if (rand()%100 < density) {
-        cEntity* e = new cEntity(olc::vf2d(i*XSIZE,j*YSIZE),NULL,NULL,OBSCTACLE);
-        map[i].push_back(e);
-      }
-      else {
-        map[i].push_back(NULL); 
-      }
-    }
-  }
-}
-
-
 bool World::OnUserCreate()
 {
   srand(time(NULL));
-  boss	 = cBoss();
-  genMap(10);
+  genMap(5);
+
+  makePlayerControls();
+
+  player = cPlayer({128, 0}, spriteManager.getPlayerSprites());
+  boss = cBoss(new olc::Sprite("../assests/Boss/bosia.png"), spriteManager.getBossSprites(), spriteManager.getBossFireHeadSprites());
+
+  spawnMinion();
+
   return true;
 }
-
 
 bool World::OnUserUpdate(float fElapsedTime)
 {
   Clear(olc::BLACK);
 
+  // Update everything
 
-  player.update(GetKey(olc::Key::A), fElapsedTime);
+  for (auto const &[key, val] : controls)
+  controls[key] = GetKey(key);
+  
+  //
+  // Player Logic
+  //
+  player.update(controls, GetMouse(0), map, fElapsedTime);
+  
+  //
+  // Minion Logic
+  //
+  // use iterator to avoid invalidating the vector while deleting
+  std::vector<cMinion *>::iterator it = minions.begin();
+  while (it != minions.end())
+  {
+    if ((*it)->getHP() <= 0)
+    {
+      delete *it;
+      it = minions.erase(it);
+    }
+    else
+    {
+      (*it)->update(&player, map, fElapsedTime);
+      ++it;
+    }
+  }
+  
+  //
+  // Boss Logic
+  //
 
-  for (int i; i < minions.size(); i++)
-    minions[i].update(player, map, fElapsedTime);
+  boss.update(&player, fElapsedTime);
+  if (boss.getTriggerMinions() == true)
+  {
+    boss.setTriggerMinions(false);
+  }
 
-  boss.update(player, fElapsedTime);
-
-
+  // Ground Animation
+  ground.update(fElapsedTime);
+  
+  //////////////////////////////////
+  //                              //
+  //  Render and Draw everything  //
+  //                              //
+  //////////////////////////////////
+  
+  SetPixelMode(olc::Pixel::ALPHA);
+  
+  // Draw Boss
   DrawSprite(boss.getPos(), boss.getCurrentSprite());
-  // render plateform
+  DrawSprite(boss.getPos(), boss.getFireHeadSprite());
+  DrawSprite(boss.getPos(), boss.getBackgroundSprite());
+
+  DrawSprite(arena.getPos(), arena.getCurrentSprite());
+  DrawSprite(ground.getPos(), spriteManager.getGroundSprite());
+  DrawSprite(ground.getPos(), ground.getCurrentSprite());
+
   DrawSprite(player.getPos(), player.getCurrentSprite());
 
-  for (int i; i < minions.size(); i++)
-    DrawSprite(minions[0].getPos(), minions[0].getCurrentSprite());
+  // Draw Boss foreground
+  DrawSprite(boss.getPos(), boss.getForegroundSprite());
 
+  for (int i = 0; i < minions.size(); i++)
+  {
+    DrawSprite(minions[i]->getPos(), minions[i]->getCurrentSprite());
+  }
+
+  SetPixelMode(olc::Pixel::NORMAL);
+
+  // Draw Hitboxes
+  for (auto &line : map)
+  {
+    for (auto &entity : line)
+    {
+      if (entity != NULL)
+        drawHitbox(entity);
+    }
+  }
+
+  drawHitbox(&player);
 
   return true;
 }
-
