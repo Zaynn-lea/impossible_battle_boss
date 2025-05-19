@@ -31,5 +31,9 @@ namespace ImpossibleBattleBoss
         void unloadBossSprites();
         BossSpriteMap getBossSprites() { return bossSprites; }
         std::vector<olc::Sprite *> getBossFireHeadSprites() { return BossFireHeadSprites; }
+
+        void loadMinionSprites();
+        void unloadMinionSprites();
+        PlayerSpriteMap* getMinionSprites() { return &playerSprites; }
     };
 }

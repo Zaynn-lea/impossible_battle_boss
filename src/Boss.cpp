@@ -73,6 +73,8 @@ void cBoss::update(cPlayer* p, float deltaTIme)
 		{
 			idleTime = 0;
 			attackSpot = getGridPositionId(p);
+			int randAttack = rand() % 6;
+			
 			switch (attackSpot)
 			{
 			case 0:
@@ -109,7 +111,7 @@ void cBoss::update(cPlayer* p, float deltaTIme)
 
 int cBoss::getGridPositionId(cPlayer* player)
 {
-	int column_index = (player->getPos().x < XSIZE / 2.0) ? 0 : 1;
+	int column_index = (player->getPos().x < XSIZE / 2.0) ? 1 : 0;
 	std::cout << "Column index: " << column_index << std::endl;
 
 	int row_index = 0;

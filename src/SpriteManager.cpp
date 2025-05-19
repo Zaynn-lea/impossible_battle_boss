@@ -140,23 +140,20 @@ namespace ImpossibleBattleBoss
         std::cout << "Unloading boss sprites..." << std::endl;
         for (auto &pair : bossSprites) {
             for (olc::Sprite* sprite_ptr : pair.second.first) {
-                if (sprite_ptr != nullptr && sprite_ptr != transparentSprite) { // Crucial check
+                if (sprite_ptr != nullptr && sprite_ptr != transparentSprite) {
                     delete sprite_ptr;
                 }
             }
-            pair.second.first.clear(); // Good practice to clear vectors after deleting contents
+            pair.second.first.clear();
     
             for (olc::Sprite* sprite_ptr : pair.second.second) {
-                if (sprite_ptr != nullptr && sprite_ptr != transparentSprite) { // Crucial check
+                if (sprite_ptr != nullptr && sprite_ptr != transparentSprite) {
                     delete sprite_ptr;
                 }
             }
             pair.second.second.clear();
         }
         bossSprites.clear();
-        // Do NOT delete m_transparentSprite here; it's done in ~SpriteManager()
-    
-        // Unload BossFireHeadSprites (these are unique, so direct delete is fine)
         for (auto sprite : BossFireHeadSprites) {
             delete sprite;
         }
@@ -164,6 +161,33 @@ namespace ImpossibleBattleBoss
         std::cout << "Boss sprites unloaded." << std::endl;
     }
 
-    void loadMinionSprites() {}
-    void unloadMinionSprites() {}
+    void SpriteManager::loadMinionSprites()
+    {
+        std::vector<olc::Sprite *> tempSprites;
+
+        for (int i = 0; i < 4; i++)
+        {
+            tempSprites.push_back(new olc::Sprite(assertPathExists("../assests/minion/bouledefeu-" + std::to_string(i) + ".png")));
+        }
+
+        minionSprites.insert(std::pair<MinionState, std::vector<olc::Sprite *>>(ALIVE_MINION, tempSprites));
+
+        tempSprites.clear();
+
+    //	tempSprites.push_back(new olc::Sprite("../assests/minion/-0.png"));    // TODO
+
+        minionSprites.insert(std::pair<MinionState, std::vector<olc::Sprite *>>(DYING_MINION, tempSprites));
+    }
+
+    void SpriteManager::unloadMinionSprites()
+    {
+        for (auto &pair : minionSprites)
+        {
+            for (auto sprite : pair.second)
+            {
+                delete sprite;
+            }
+        }
+        minionSprites.clear();
+    }
 }
