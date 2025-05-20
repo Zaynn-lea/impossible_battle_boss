@@ -69,3 +69,10 @@ make
 ```bash
 ./ImpossibleBattleBoss
 ```
+
+# Controles
+
+Q : Mouvement vers la gauche
+D : Mouvement vers la droite
+Espace : Sauter
+cliquer : Attaquer
