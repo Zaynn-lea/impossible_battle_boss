@@ -24,8 +24,6 @@ bool World::OnUserCreate()
   player = cPlayer({128, 0}, spriteManager.getPlayerSprites());
   boss = cBoss(new olc::Sprite("../assests/Boss/bosia.png"), spriteManager.getBossSprites(), spriteManager.getBossFireHeadSprites());
 
-  spawnMinion();
-
   return true;
 }
 
@@ -69,6 +67,7 @@ bool World::OnUserUpdate(float fElapsedTime)
   boss.update(&player, fElapsedTime);
   if (boss.getTriggerMinions() == true)
   {
+    spawnMinion();
     boss.setTriggerMinions(false);
   }
 
@@ -105,16 +104,16 @@ bool World::OnUserUpdate(float fElapsedTime)
   SetPixelMode(olc::Pixel::NORMAL);
 
   // Draw Hitboxes
-  for (auto &line : map)
+  /* for (auto &line : map)
   {
     for (auto &entity : line)
     {
       if (entity != NULL)
         drawHitbox(entity);
     }
-  }
+  } */
 
-  drawHitbox(&player);
+  //drawHitbox(&player);
 
   return true;
 }

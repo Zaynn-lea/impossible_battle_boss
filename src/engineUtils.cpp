@@ -24,7 +24,7 @@ void World::makePlayerControls()
 
 void World::spawnMinion()
 {
-  if (minions.size() >= 2)
+  if (minions.size() >= 3)
     return;
   cMinion* m = new cMinion({285, 100}, spriteManager.getMinionSprites());
   //cMinion* m = new cMinion({0, 0}, spriteManager.getMinionSprites());
