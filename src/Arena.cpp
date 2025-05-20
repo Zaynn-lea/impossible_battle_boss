@@ -43,7 +43,7 @@ void cArena::update(float fElapsedTime)
 	{
 		cAnimable::animationTime += fElapsedTime;
 
-		if (cAnimable::animationTime >= 0.1)
+		if (cAnimable::animationTime >= animationSpeed)
 		{
 			cAnimable::animationCounter++;
 			cAnimable::animationCounter = cAnimable::animationCounter % (*sprites).size();

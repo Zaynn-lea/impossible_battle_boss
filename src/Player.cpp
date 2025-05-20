@@ -88,7 +88,7 @@ void cPlayer::update(std::map<olc::Key, olc::HWButton> keys, olc::HWButton mouse
 
 	cAnimable::animationTime += deltaTime;
 
-	if (cAnimable::animationTime >= 0.1)
+	if (cAnimable::animationTime >= animationSpeed)
 	{
 		cAnimable::animationCounter++;
 		cAnimable::animationCounter = cAnimable::animationCounter % sprites[state].first.size();

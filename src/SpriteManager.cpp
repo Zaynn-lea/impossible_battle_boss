@@ -72,6 +72,7 @@ namespace ImpossibleBattleBoss
             playerSprites[IDLE_RIGHT_PLAYER].push_back(new olc::Sprite(assertPathExists("../assests/idle_player/idle_right-" + std::to_string(i) + ".png")));
             playerSprites[IDLE_LEFT_PLAYER].push_back(new olc::Sprite(assertPathExists("../assests/idle_player/idle_left-" + std::to_string(i) + ".png")));
         }
+
         playerSprites.insert(std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_LEFT_PLAYER, std::vector<olc::Sprite *>()));
         playerSprites.insert(std::pair<PlayerState, std::vector<olc::Sprite *>>(WALKING_RIGHT_PLAYER, std::vector<olc::Sprite *>()));
         for (int i = 0; i < 8; ++i)

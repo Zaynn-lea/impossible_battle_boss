@@ -84,7 +84,7 @@ void cBoss::update(cPlayer *p, float deltaTIme)
 {
 	animationTime += deltaTIme;
 	idleTime += deltaTIme;
-	if (animationTime >= 0.1)
+	if (animationTime >= animationSpeed)
 	{
 		animationCounter++;
 		fireHeadCounter++;

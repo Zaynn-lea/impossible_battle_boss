@@ -33,7 +33,7 @@ MinionState cMinion::getState() { return state; }
 
 void cMinion::update(cPlayer* p, Grid map, float deltaTime){
   animationTime += deltaTime;
-	if (animationTime >= 0.1)
+	if (animationTime >= animationSpeed)
 	{
 		animationCounter++;
     if (animationCounter >= (*sprites)[state].size())
