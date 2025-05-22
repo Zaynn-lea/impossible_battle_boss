@@ -22,7 +22,7 @@ bool World::OnUserCreate()
   makePlayerControls();
 
   player = cPlayer({128, 0}, spriteManager.getPlayerSprites());
-  boss = cBoss(new olc::Sprite("../assests/Boss/bosia.png"), spriteManager.getBossSprites(), spriteManager.getBossFireHeadSprites());
+  boss = cBoss(new olc::Sprite("../assets/Boss/bosia.png"), spriteManager.getBossSprites(), spriteManager.getBossFireHeadSprites());
 
   return true;
 }
