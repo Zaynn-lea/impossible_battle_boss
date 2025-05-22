@@ -10,14 +10,14 @@ namespace ImpossibleBattleBoss
 
     class SpriteManager
     {
-        olc::Sprite* transparentSprite = new olc::Sprite(assertPathExists("../assests/Boss/Attacks/transpBackground.png"));;
+        olc::Sprite* transparentSprite = new olc::Sprite(assertPathExists("../assets/Boss/Attacks/transpBackground.png"));;
         PlayerSpriteMap playerSprites;
         BossSpriteMap bossSprites;
         std::vector<olc::Sprite *> BossFireHeadSprites;
         std::map<MinionState, std::vector<olc::Sprite *>> minionSprites;
         std::vector<olc::Sprite *> groundSprites;
-        olc::Sprite* groundSprite = new olc::Sprite(assertPathExists("../assests/ground/solseul-0.png"));
-        olc::Sprite* arenaSprite = new olc::Sprite(assertPathExists("../assests/arena/bosiasol-0.png"));
+        olc::Sprite* groundSprite = new olc::Sprite(assertPathExists("../assets/ground/solseul-0.png"));
+        olc::Sprite* arenaSprite = new olc::Sprite(assertPathExists("../assets/arena/bosiasol-0.png"));
         
         public:
         SpriteManager();

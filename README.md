@@ -1,7 +1,7 @@
 
 # impossible_battle_boss
 
-![screenshot](assests/screenshot.png)
+![screenshot](assets/screenshot.png)
 
 # Instructions de Compilation
 
