@@ -132,10 +132,10 @@ void cBoss::update(cPlayer *p, float deltaTIme)
 
 int cBoss::getGridPositionId(cPlayer *player)
 {
-	int column_index = (player->getPos().x < XSIZE / 2.0) ? 1 : 0;
+	int column_index = (player->getPos().x < X_MAX / 2.0) ? 0 : 1;
 
 	int row_index = 0;
-	double row_height = static_cast<double>(YSIZE) / 3.0;
+	double row_height = static_cast<double>(Y_MAX) / 3.0;
 
 	if (player->getPos().y < row_height)
 	{
@@ -149,7 +149,7 @@ int cBoss::getGridPositionId(cPlayer *player)
 	{
 		row_index = 2;
 	}
-
+	
 	const int num_cols = 2;
 	int grid_id = row_index * 2 + column_index;
 
